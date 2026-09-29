@@ -869,73 +869,15 @@ body {
     opacity 0.6s var(--ease-out),
     transform 0.6s var(--ease-out);
 }
-.reveal-stagger.visible > *:nth-child(1) {
+.reveal-stagger.visible > * {
   opacity: 1;
   transform: none;
-  transition-delay: 0.05s;
-}
-.reveal-stagger.visible > *:nth-child(2) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.12s;
-}
-.reveal-stagger.visible > *:nth-child(3) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.19s;
-}
-.reveal-stagger.visible > *:nth-child(4) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.26s;
-}
-.reveal-stagger.visible > *:nth-child(5) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.33s;
-}
-.reveal-stagger.visible > *:nth-child(6) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.4s;
-}
-.reveal-stagger.visible > *:nth-child(7) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.47s;
-}
-.reveal-stagger.visible > *:nth-child(8) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.54s;
-}
-.reveal-stagger.visible > *:nth-child(9) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.61s;
-}
-.reveal-stagger.visible > *:nth-child(10) {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.68s;
 }
 
 .page-animate {
   opacity: 0;
   transform: translateY(24px);
   animation: pageIn 0.9s var(--ease-out) forwards;
-}
-.page-animate:nth-child(1) {
-  animation-delay: 0.05s;
-}
-.page-animate:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.page-animate:nth-child(3) {
-  animation-delay: 0.25s;
-}
-.page-animate:nth-child(4) {
-  animation-delay: 0.35s;
 }
 @keyframes pageIn {
   to {
@@ -1232,6 +1174,8 @@ body {
     transform: none;
     animation: none;
     transition: none;
+    transition-delay: 0s !important;
+    animation-delay: 0s !important;
   }
 }
 

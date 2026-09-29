@@ -35,7 +35,12 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/* 3. Scroll-triggered reveal via IntersectionObserver */
+/* 3. Hero entrance stagger (avoids fragile :nth-child delays) */
+document.querySelectorAll(".hero-animate").forEach((el, i) => {
+  el.style.animationDelay = `${0.1 + i * 0.12}s`;
+});
+
+/* 4. Scroll-triggered reveal via IntersectionObserver */
 const obs = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
@@ -50,7 +55,7 @@ const obs = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 
-/* 4. Active nav link via section IntersectionObserver */
+/* 5. Active nav link via section IntersectionObserver */
 const desktopNavLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav a[href^="#"]');
 const allNavLinks = [...desktopNavLinks, ...mobileNavLinks];
@@ -77,7 +82,7 @@ if (sections.length) {
   sections.forEach((section) => sectionObs.observe(section));
 }
 
-/* 5. Copy email to clipboard */
+/* 6. Copy email to clipboard */
 document.getElementById("copyEmail").addEventListener("click", function () {
   const email = this.getAttribute("data-email");
   const handle = document.getElementById("emailHandle");

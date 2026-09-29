@@ -103,13 +103,6 @@ body {
 /* ============================================================
    TYPOGRAPHY SCALE
 ============================================================ */
-.display-lg {
-  font-size: 3.5rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
 .headline-lg {
   font-size: 2rem;
   font-weight: 600;
@@ -776,21 +769,6 @@ footer {
   transform: translateY(24px);
   animation: heroIn 0.9s var(--ease-out) forwards;
 }
-.hero-animate:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.hero-animate:nth-child(2) {
-  animation-delay: 0.22s;
-}
-.hero-animate:nth-child(3) {
-  animation-delay: 0.34s;
-}
-.hero-animate:nth-child(4) {
-  animation-delay: 0.46s;
-}
-.hero-animate:nth-child(5) {
-  animation-delay: 0.58s;
-}
 
 @keyframes heroIn {
   to {
@@ -911,6 +889,7 @@ footer {
     transform: none;
     animation: none;
     transition: none;
+    animation-delay: 0s !important;
   }
   .scroll-line::after {
     animation: none;
