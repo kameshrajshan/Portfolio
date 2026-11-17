@@ -1,114 +1,49 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AllTrails Group Hike Feature | Kamesh Raj Shanmugam</title>
-    <meta name="description" content="Case study: peer-to-peer Group Hike feature design for AllTrails — research, flows, and hi-fi mobile screens." />
-    <meta property="og:title" content="AllTrails Group Hike Feature | Kamesh Raj Shanmugam" />
-    <meta property="og:description" content="Case study: peer-to-peer Group Hike feature design for AllTrails — research, flows, and hi-fi mobile screens." />
-    <meta property="og:type" content="article" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../project-styles.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <!-- ================================================================
-       NAV
-    ================================================================ -->
-    <nav class="proj-nav" id="projNav" aria-label="Primary">
-      <a href="../../index.html" class="nav-logo">KRS / Portfolio</a>
-      <ul class="nav-links">
-        <li><a href="../../index.html#work">Work</a></li>
-        <li><a href="../../index.html#about">About</a></li>
-        <li><a href="../../index.html#experience">Experience</a></li>
-        <li><a href="../../index.html#contact">Contact</a></li>
-      </ul>
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-        aria-controls="mobileNav"
-      >
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-
-    <!-- Mobile nav -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-      <a href="../../index.html#work">Work</a>
-      <a href="../../index.html#about">About</a>
-      <a href="../../index.html#experience">Experience</a>
-      <a href="../../index.html#contact">Contact</a>
-      <a href="../../index.html">Back to Portfolio</a>
-    </nav>
-
-    <!-- ================================================================
-       PAGE
-    ================================================================ -->
-    <main id="main" class="project-page">
-      <!-- Hero -->
-      <header class="project-hero">
-        <div class="project-hero-left">
-          <div class="page-animate">
-            <a href="../../index.html" class="nav-back">Back to Portfolio</a>
-          </div>
-          <div class="page-animate">
-            <span class="project-hero-label">Case Study / 01</span>
-          </div>
-          <h1 class="project-hero-title page-animate">
-            AllTrails<br />Group Hike
-          </h1>
-          <div class="project-hero-tags page-animate">
-            <span class="tag">Mobile App</span>
-            <span class="tag">Feature Design</span>
-            <span class="tag">UX Research</span>
-          </div>
-        </div>
-        <div class="project-meta-grid page-animate">
-          <div class="project-meta-item">
-            <span class="label">Role</span>
-            <span class="value">Primary Designer</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Year</span>
-            <span class="value">2023</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Duration</span>
-            <span class="value">4 Weeks</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Tools</span>
-            <span class="value">Figma, Adobe Suite</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Type</span>
-            <span class="value">Feature Design</span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Banner -->
-      <div class="wide-image">
-        <img
-          src="../../images/Alltrails/Cover.png"
-          alt="AllTrails Group Hike Feature"
-          class="wide-image-media"
-        />
-      </div>
-
-      <!-- Body -->
-      <div class="project-content">
+---
+import Case from '../../layouts/CaseStudy.astro';
+import Img from '../../components/Img.astro';
+const data = {
+  "title": "AllTrails Group Hike",
+  "label": "Case Study / 01",
+  "tags": [
+    "Mobile App",
+    "Feature Design",
+    "UX Research"
+  ],
+  "meta": [
+    [
+      "Role",
+      "Primary Designer"
+    ],
+    [
+      "Year",
+      "2023"
+    ],
+    [
+      "Duration",
+      "4 Weeks"
+    ],
+    [
+      "Tools",
+      "Figma, Adobe Suite"
+    ],
+    [
+      "Type",
+      "Feature Design"
+    ]
+  ],
+  "cover": {
+    "src": "Alltrails/Cover.png",
+    "alt": "AllTrails Group Hike Feature"
+  },
+  "pageTitle": "AllTrails Group Hike Feature | Kamesh Raj Shanmugam",
+  "description": "Case study: peer-to-peer Group Hike feature design for AllTrails — research, flows, and hi-fi mobile screens."
+};
+---
+<Case {...data}>
+<div class="project-content">
         <div class="project-body">
           <!-- Overview -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Overview</h2>
               <span class="content-section-index">01</span>
@@ -135,7 +70,7 @@
           </section>
 
           <!-- Problem Statement -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Problem Statement</h2>
               <span class="content-section-index">02</span>
@@ -169,7 +104,7 @@
           </section>
 
           <!-- Research & Analysis -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Research &amp; Analysis</h2>
               <span class="content-section-index">03</span>
@@ -291,7 +226,7 @@
               combines authoritative trail data with peer-to-peer event
               creation in a single product.
             </p>
-            <div class="compare-grid reveal-stagger">
+            <div class="compare-grid">
               <div class="compare-item">
                 <span class="compare-name">Gaia GPS</span>
                 <span class="compare-desc">
@@ -311,7 +246,7 @@
           </section>
 
           <!-- User Persona -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">User Persona</h2>
               <span class="content-section-index">04</span>
@@ -371,12 +306,12 @@
           </section>
 
           <!-- Goals -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Goals</h2>
               <span class="content-section-index">05</span>
             </div>
-            <div class="goal-list reveal-stagger">
+            <div class="goal-list">
               <div class="goal-item">
                 <span class="goal-number">01</span>
                 <div>
@@ -417,7 +352,7 @@
           </section>
 
           <!-- User Flow -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">User Flow</h2>
               <span class="content-section-index">06</span>
@@ -431,15 +366,12 @@
               terminate at Saved Events.
             </p>
             <figure class="mag-img-single">
-              <img
-                src="../../images/Alltrails/Userflow.png"
-                alt="AllTrails Group Hike User Flow Diagram"
-              />
+              <Img src="Alltrails/Userflow.png" alt="AllTrails Group Hike User Flow Diagram" />
             </figure>
           </section>
 
           <!-- Design Decisions -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Design Decisions</h2>
               <span class="content-section-index">07</span>
@@ -493,7 +425,7 @@
           </section>
 
           <!-- Visual Design -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Visual Design</h2>
               <span class="content-section-index">08</span>
@@ -513,10 +445,7 @@
               mobile displays.
             </p>
             <figure class="mag-img-single">
-              <img
-                src="../../images/Alltrails/Visual%20Design.png"
-                alt="AllTrails Style Guide: Colour palette, typography, and component library"
-              />
+              <Img src="Alltrails/Visual Design.png" alt="AllTrails Style Guide: Colour palette, typography, and component library" />
             </figure>
           </section>
 
@@ -531,63 +460,24 @@
               both success states, and the Saved Events view.
             </p>
             <div class="screens-grid">
-              <img
-                src="../../images/Alltrails/01%20-%2001.png"
-                alt="Community Feed, Local Tab"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%202.png"
-                alt="Events Tab, Host View with Trail Cards"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%203.png"
-                alt="Step 1, Date, Time and Activity"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%204.png"
-                alt="Step 2, Group Size"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%205.png"
-                alt="Step 3, Public or Private"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%206.png"
-                alt="Step 4, Review and Confirm (Public)"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%207.png"
-                alt="Success State, Public Event Live"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%208.png"
-                alt="Step 4, Review and Confirm (Private)"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%209.png"
-                alt="Success State, Private Event Live"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%2010.png"
-                alt="Join Tab, Events Nearby"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%2011.png"
-                alt="Join Sheet, Event 1"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%2012.png"
-                alt="Join Sheet, Event 2"
-              />
-              <img
-                src="../../images/Alltrails/01%20-%2013.png"
-                alt="Saved Events, Upcoming and Past"
-              />
+              <Img src="Alltrails/01 - 01.png" alt="Community Feed, Local Tab" />
+              <Img src="Alltrails/01 - 2.png" alt="Events Tab, Host View with Trail Cards" />
+              <Img src="Alltrails/01 - 3.png" alt="Step 1, Date, Time and Activity" />
+              <Img src="Alltrails/01 - 4.png" alt="Step 2, Group Size" />
+              <Img src="Alltrails/01 - 5.png" alt="Step 3, Public or Private" />
+              <Img src="Alltrails/01 - 6.png" alt="Step 4, Review and Confirm (Public)" />
+              <Img src="Alltrails/01 - 7.png" alt="Success State, Public Event Live" />
+              <Img src="Alltrails/01 - 8.png" alt="Step 4, Review and Confirm (Private)" />
+              <Img src="Alltrails/01 - 9.png" alt="Success State, Private Event Live" />
+              <Img src="Alltrails/01 - 10.png" alt="Join Tab, Events Nearby" />
+              <Img src="Alltrails/01 - 11.png" alt="Join Sheet, Event 1" />
+              <Img src="Alltrails/01 - 12.png" alt="Join Sheet, Event 2" />
+              <Img src="Alltrails/01 - 13.png" alt="Saved Events, Upcoming and Past" />
             </div>
           </section>
 
           <!-- Reflection -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Reflection</h2>
               <span class="content-section-index">10</span>
@@ -623,7 +513,7 @@
 
         <!-- Sidebar -->
         <aside class="project-sidebar">
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Project Info</p>
             <div class="sidebar-item">
               <span class="sidebar-label">Type</span>
@@ -646,7 +536,7 @@
               <span class="sidebar-value">2023</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Tools Used</p>
             <div class="sidebar-item">
               <span class="sidebar-value">Figma</span>
@@ -655,7 +545,7 @@
               <span class="sidebar-value">Adobe Suite</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Focus Areas</p>
             <div class="sidebar-item">
               <span class="sidebar-value">UX Research</span>
@@ -672,16 +562,4 @@
           </div>
         </aside>
       </div>
-    </main>
-
-    <!-- ================================================================
-       FOOTER
-    ================================================================ -->
-    <footer class="proj-footer">
-      <span class="footer-copy">&copy; 2026 Kamesh Raj Shanmugam</span>
-      <a href="../../index.html" class="footer-back">Back to Portfolio</a>
-    </footer>
-
-    <script src="../project-script.js"></script>
-  </body>
-</html>
+</Case>

@@ -1,120 +1,53 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Service Hub UX Case Study | Kamesh Raj Shanmugam</title>
-    <meta name="description" content="Case study: Service Hub, an iOS home-services marketplace for adults 65+ and caregivers — dual-user UX and trust design." />
-    <meta property="og:title" content="Service Hub UX Case Study | Kamesh Raj Shanmugam" />
-    <meta property="og:description" content="Case study: Service Hub, an iOS home-services marketplace for adults 65+ and caregivers — dual-user UX and trust design." />
-    <meta property="og:type" content="article" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../project-styles.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <!-- ================================================================
-       NAV
-    ================================================================ -->
-    <nav class="proj-nav" id="projNav" aria-label="Primary">
-      <a href="../../index.html" class="nav-logo">KRS / Portfolio</a>
-      <ul class="nav-links">
-        <li><a href="../../index.html#work">Work</a></li>
-        <li><a href="../../index.html#about">About</a></li>
-        <li><a href="../../index.html#experience">Experience</a></li>
-        <li><a href="../../index.html#contact">Contact</a></li>
-      </ul>
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-        aria-controls="mobileNav"
-      >
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-
-    <!-- Mobile nav -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-      <a href="../../index.html#work">Work</a>
-      <a href="../../index.html#about">About</a>
-      <a href="../../index.html#experience">Experience</a>
-      <a href="../../index.html#contact">Contact</a>
-      <a href="../../index.html">Back to Portfolio</a>
-    </nav>
-
-    <!-- ================================================================
-       PAGE
-    ================================================================ -->
-    <main id="main" class="project-page">
-      <!-- Hero -->
-      <header class="project-hero">
-        <div class="project-hero-left">
-          <div class="page-animate">
-            <a href="../../index.html" class="nav-back">Back to Portfolio</a>
-          </div>
-          <div class="page-animate">
-            <span class="project-hero-label">Case Study / 02</span>
-          </div>
-          <h1 class="project-hero-title page-animate">Service<br />Hub</h1>
-          <div class="project-hero-tags page-animate">
-            <span class="tag">Mobile App</span>
-            <span class="tag">UX Research</span>
-            <span class="tag">Product Design</span>
-          </div>
-        </div>
-        <div class="project-meta-grid page-animate">
-          <div class="project-meta-item">
-            <span class="label">Role</span>
-            <span class="value">UX Research &amp; Product Design</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Year</span>
-            <span class="value">2024</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Scope</span>
-            <span class="value">End to End, iOS</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Market</span>
-            <span class="value">North America</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Stage</span>
-            <span class="value">Ideation to High Fidelity</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Tools</span>
-            <span class="value">Figma</span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Banner -->
-      <div class="wide-image">
-        <img
-          src="../../images/Service%20Hub/Cover.png"
-          alt="Service Hub, a trusted home services marketplace"
-          class="wide-image-media"
-        />
-        <span class="wide-image-label"
-          >Service Hub, a trusted home services marketplace for adults 65+ and
-          their caregivers</span
-        >
-      </div>
-
-      <!-- Body -->
-      <div class="project-content">
+---
+import Case from '../../layouts/CaseStudy.astro';
+import Img from '../../components/Img.astro';
+const data = {
+  "title": "Service Hub",
+  "label": "Case Study / 02",
+  "tags": [
+    "Mobile App",
+    "UX Research",
+    "Product Design"
+  ],
+  "meta": [
+    [
+      "Role",
+      "UX Research & Product Design"
+    ],
+    [
+      "Year",
+      "2024"
+    ],
+    [
+      "Scope",
+      "End to End, iOS"
+    ],
+    [
+      "Market",
+      "North America"
+    ],
+    [
+      "Stage",
+      "Ideation to High Fidelity"
+    ],
+    [
+      "Tools",
+      "Figma"
+    ]
+  ],
+  "cover": {
+    "src": "Service Hub/Cover.png",
+    "alt": "Service Hub, a trusted home services marketplace"
+  },
+  "pageTitle": "Service Hub UX Case Study | Kamesh Raj Shanmugam",
+  "description": "Case study: Service Hub, an iOS home-services marketplace for adults 65+ and caregivers — dual-user UX and trust design."
+};
+---
+<Case {...data}>
+<div class="project-content">
         <div class="project-body">
           <!-- Overview -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Overview</h2>
               <span class="content-section-index">01</span>
@@ -144,7 +77,7 @@
           </section>
 
           <!-- Problem Space -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">The Problem</h2>
               <span class="content-section-index">02</span>
@@ -163,7 +96,7 @@
               among the most common vectors. The existing apps do not solve
               this problem; in many cases, they compound it.
             </p>
-            <div class="goal-list stack-gap-lg reveal-stagger">
+            <div class="goal-list stack-gap-lg">
               <div class="goal-item">
                 <span class="goal-number">01</span>
                 <div>
@@ -208,7 +141,7 @@
           </section>
 
           <!-- Market & Users -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Market &amp; Users</h2>
               <span class="content-section-index">03</span>
@@ -241,7 +174,7 @@
               Every major competitor addresses part of the need, but none
               serves this user well.
             </p>
-            <div class="compare-grid reveal-stagger">
+            <div class="compare-grid">
               <div class="compare-item">
                 <span class="compare-name">TaskRabbit</span>
                 <span class="compare-desc">
@@ -372,7 +305,7 @@
           </section>
 
           <!-- Design Principles -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Design Principles</h2>
               <span class="content-section-index">04</span>
@@ -382,7 +315,7 @@
               Each emerged directly from the research and the competitor
               analysis.
             </p>
-            <div class="goal-list stack-gap-lg reveal-stagger">
+            <div class="goal-list stack-gap-lg">
               <div class="goal-item">
                 <span class="goal-number">01</span>
                 <div>
@@ -456,7 +389,7 @@
           </section>
 
           <!-- Dual-User Architecture -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Dual-User Architecture</h2>
               <span class="content-section-index">05</span>
@@ -467,7 +400,7 @@
               needs, while both sides rest on a single shared trust layer
               underneath.
             </p>
-            <div class="compare-grid reveal-stagger">
+            <div class="compare-grid">
               <div class="compare-item">
                 <span class="compare-name">The senior interface</span>
                 <span class="compare-desc">
@@ -504,7 +437,7 @@
           </section>
 
           <!-- Key Design Decisions -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Key Design Decisions</h2>
               <span class="content-section-index">06</span>
@@ -514,7 +447,7 @@
               a specific finding from research, a competitor gap, or a
               rule drawn from established usability work.
             </p>
-            <div class="goal-list stack-gap-lg reveal-stagger">
+            <div class="goal-list stack-gap-lg">
               <div class="goal-item">
                 <span class="goal-number">01</span>
                 <div>
@@ -584,7 +517,7 @@
           </section>
 
           <!-- User Flow -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">User Flow</h2>
               <span class="content-section-index">07</span>
@@ -597,15 +530,12 @@
               available nearby.
             </p>
             <figure class="mag-img-single">
-              <img
-                src="../../images/Service%20Hub/Userflow.png"
-                alt="Service Hub User Flow Diagram"
-              />
+              <Img src="Service Hub/Userflow.png" alt="Service Hub User Flow Diagram" />
             </figure>
           </section>
 
           <!-- Visual Design -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Visual Design</h2>
               <span class="content-section-index">08</span>
@@ -621,22 +551,10 @@
               aging eyes.
             </p>
             <div class="screens-grid">
-              <img
-                src="../../images/Service%20Hub/Visual%20Design/Group%20120.png"
-                alt="Primary colour swatch #702B00"
-              />
-              <img
-                src="../../images/Service%20Hub/Visual%20Design/Group%20121.png"
-                alt="Secondary colour swatch #ECE7E3"
-              />
-              <img
-                src="../../images/Service%20Hub/Visual%20Design/Group%20122.png"
-                alt="Tertiary colour swatch #CFE2F9"
-              />
-              <img
-                src="../../images/Service%20Hub/Visual%20Design/Group%20123.png"
-                alt="Neutral colour swatch #FFFFFF"
-              />
+              <Img src="Service Hub/Visual Design/Group 120.png" alt="Primary colour swatch #702B00" />
+              <Img src="Service Hub/Visual Design/Group 121.png" alt="Secondary colour swatch #ECE7E3" />
+              <Img src="Service Hub/Visual Design/Group 122.png" alt="Tertiary colour swatch #CFE2F9" />
+              <Img src="Service Hub/Visual Design/Group 123.png" alt="Neutral colour swatch #FFFFFF" />
             </div>
           </section>
 
@@ -654,115 +572,37 @@
               nearby.
             </p>
             <div class="screens-grid">
-              <img
-                src="../../images/Service%20Hub/Main%20Frame.png"
-                alt="01 Welcome screen with mobile number sign-in"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%201.png"
-                alt="02 Role selection: senior homeowner or caregiver"
-              />
-              <img
-                src="../../images/Service%20Hub/Frame.png"
-                alt="03 OTP verification screen"
-              />
-              <img
-                src="../../images/Service%20Hub/Background-1.png"
-                alt="04 Profile setup step 1: name, address, and phone"
-              />
-              <img
-                src="../../images/Service%20Hub/App%20Background.png"
-                alt="05 Profile setup step 2: emergency contact and caregiver permissions"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%206.png"
-                alt="06 Profile setup step 3: provider preferences and access notes"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%207.png"
-                alt="07 Home screen with service categories and search"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%208.png"
-                alt="08 Top-rated providers list with ratings and trust badges"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2020.png"
-                alt="09 Provider profile with verified credentials and reviews"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%209.png"
-                alt="10 Booking step 1: pick a date and time"
-              />
-              <img
-                src="../../images/Service%20Hub/Background.png"
-                alt="11 Booking step 2: describe the issue with common tags"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2024.png"
-                alt="12 Booking step 3: review booking with fixed price and payment"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2011.png"
-                alt="13 Booking confirmed with day-of reminder and share option"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2012.png"
-                alt="14 My Bookings, Upcoming tab with live arrival status"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2013.png"
-                alt="15 My Bookings, Completed tab with review and rebook actions"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2017.png"
-                alt="16 Cancellation confirmation with policy and undo window"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2018.png"
-                alt="17 Select a cancellation reason"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2019.png"
-                alt="18 Booking cancelled with two-minute undo countdown"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2014.png"
-                alt="19 My Bookings, Cancelled tab with rebook option"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2023.png"
-                alt="20 Post-job review with star rating and quick tags"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2022.png"
-                alt="21 Messages inbox with provider conversations"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2016.png"
-                alt="22 Notifications with unread and read tabs"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2021.png"
-                alt="23 Senior profile with account, payment, and support"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2015.png"
-                alt="24 Empty state: no professionals available nearby"
-              />
-              <img
-                src="../../images/Service%20Hub/Group%2010.png"
-                alt="25 Caregiver onboarding: set up access and send request"
-              />
-              <img
-                src="../../images/Service%20Hub/Greeting%20text.png"
-                alt="26 Caregiver dashboard with live bookings and alerts"
-              />
+              <Img src="Service Hub/Main Frame.png" alt="01 Welcome screen with mobile number sign-in" />
+              <Img src="Service Hub/Group 1.png" alt="02 Role selection: senior homeowner or caregiver" />
+              <Img src="Service Hub/Frame.png" alt="03 OTP verification screen" />
+              <Img src="Service Hub/Background-1.png" alt="04 Profile setup step 1: name, address, and phone" />
+              <Img src="Service Hub/App Background.png" alt="05 Profile setup step 2: emergency contact and caregiver permissions" />
+              <Img src="Service Hub/Group 6.png" alt="06 Profile setup step 3: provider preferences and access notes" />
+              <Img src="Service Hub/Group 7.png" alt="07 Home screen with service categories and search" />
+              <Img src="Service Hub/Group 8.png" alt="08 Top-rated providers list with ratings and trust badges" />
+              <Img src="Service Hub/Group 20.png" alt="09 Provider profile with verified credentials and reviews" />
+              <Img src="Service Hub/Group 9.png" alt="10 Booking step 1: pick a date and time" />
+              <Img src="Service Hub/Background.png" alt="11 Booking step 2: describe the issue with common tags" />
+              <Img src="Service Hub/Group 24.png" alt="12 Booking step 3: review booking with fixed price and payment" />
+              <Img src="Service Hub/Group 11.png" alt="13 Booking confirmed with day-of reminder and share option" />
+              <Img src="Service Hub/Group 12.png" alt="14 My Bookings, Upcoming tab with live arrival status" />
+              <Img src="Service Hub/Group 13.png" alt="15 My Bookings, Completed tab with review and rebook actions" />
+              <Img src="Service Hub/Group 17.png" alt="16 Cancellation confirmation with policy and undo window" />
+              <Img src="Service Hub/Group 18.png" alt="17 Select a cancellation reason" />
+              <Img src="Service Hub/Group 19.png" alt="18 Booking cancelled with two-minute undo countdown" />
+              <Img src="Service Hub/Group 14.png" alt="19 My Bookings, Cancelled tab with rebook option" />
+              <Img src="Service Hub/Group 23.png" alt="20 Post-job review with star rating and quick tags" />
+              <Img src="Service Hub/Group 22.png" alt="21 Messages inbox with provider conversations" />
+              <Img src="Service Hub/Group 16.png" alt="22 Notifications with unread and read tabs" />
+              <Img src="Service Hub/Group 21.png" alt="23 Senior profile with account, payment, and support" />
+              <Img src="Service Hub/Group 15.png" alt="24 Empty state: no professionals available nearby" />
+              <Img src="Service Hub/Group 10.png" alt="25 Caregiver onboarding: set up access and send request" />
+              <Img src="Service Hub/Greeting text.png" alt="26 Caregiver dashboard with live bookings and alerts" />
             </div>
           </section>
 
           <!-- User Testing -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">User Testing</h2>
               <span class="content-section-index">10</span>
@@ -847,7 +687,7 @@
           </section>
 
           <!-- Testing Insights -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Testing Insights</h2>
               <span class="content-section-index">11</span>
@@ -857,7 +697,7 @@
               a clear change in the product, a decision worth preserving, or
               a gap worth designing next.
             </p>
-            <div class="goal-list stack-gap-lg reveal-stagger">
+            <div class="goal-list stack-gap-lg">
               <div class="goal-item">
                 <span class="goal-number">01</span>
                 <div>
@@ -925,7 +765,7 @@
           </section>
 
           <!-- Outcomes & Reflection -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Outcomes &amp; Reflection</h2>
               <span class="content-section-index">12</span>
@@ -968,7 +808,7 @@
 
         <!-- Sidebar -->
         <aside class="project-sidebar">
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Project Info</p>
             <div class="sidebar-item">
               <span class="sidebar-label">Type</span>
@@ -991,13 +831,13 @@
               <span class="sidebar-value">2024</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Tools Used</p>
             <div class="sidebar-item">
               <span class="sidebar-value">Figma</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Focus Areas</p>
             <div class="sidebar-item">
               <span class="sidebar-value">UX Research</span>
@@ -1017,16 +857,4 @@
           </div>
         </aside>
       </div>
-    </main>
-
-    <!-- ================================================================
-       FOOTER
-    ================================================================ -->
-    <footer class="proj-footer">
-      <span class="footer-copy">&copy; 2026 Kamesh Raj Shanmugam</span>
-      <a href="../../index.html" class="footer-back">Back to Portfolio</a>
-    </footer>
-
-    <script src="../project-script.js"></script>
-  </body>
-</html>
+</Case>

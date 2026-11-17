@@ -1,114 +1,49 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monocoque Magazine | Kamesh Raj Shanmugam</title>
-    <meta name="description" content="Case study: end-to-end art direction for Monocoque, an independent Formula 1 print magazine." />
-    <meta property="og:title" content="Monocoque Magazine | Kamesh Raj Shanmugam" />
-    <meta property="og:description" content="Case study: end-to-end art direction for Monocoque, an independent Formula 1 print magazine." />
-    <meta property="og:type" content="article" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../project-styles.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <!-- ================================================================
-       NAV
-    ================================================================ -->
-    <nav class="proj-nav" id="projNav" aria-label="Primary">
-      <a href="../../index.html" class="nav-logo">KRS / Portfolio</a>
-      <ul class="nav-links">
-        <li><a href="../../index.html#work">Work</a></li>
-        <li><a href="../../index.html#about">About</a></li>
-        <li><a href="../../index.html#experience">Experience</a></li>
-        <li><a href="../../index.html#contact">Contact</a></li>
-      </ul>
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-        aria-controls="mobileNav"
-      >
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-
-    <!-- Mobile nav -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-      <a href="../../index.html#work">Work</a>
-      <a href="../../index.html#about">About</a>
-      <a href="../../index.html#experience">Experience</a>
-      <a href="../../index.html#contact">Contact</a>
-      <a href="../../index.html">Back to Portfolio</a>
-    </nav>
-
-    <!-- ================================================================
-       PAGE
-    ================================================================ -->
-    <main id="main" class="project-page">
-      <!-- Hero -->
-      <header class="project-hero">
-        <div class="project-hero-left">
-          <div class="page-animate">
-            <a href="../../index.html" class="nav-back">Back to Portfolio</a>
-          </div>
-          <div class="page-animate">
-            <span class="project-hero-label">Case Study / 04</span>
-          </div>
-          <h1 class="project-hero-title page-animate">
-            Monocoque<br />Magazine
-          </h1>
-          <div class="project-hero-tags page-animate">
-            <span class="tag">Magazine Design</span>
-            <span class="tag">Art Direction</span>
-            <span class="tag">Branding</span>
-          </div>
-        </div>
-        <div class="project-meta-grid page-animate">
-          <div class="project-meta-item">
-            <span class="label">Role</span>
-            <span class="value">Art Director &amp; Designer</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Year</span>
-            <span class="value">2022</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Duration</span>
-            <span class="value">4 Months</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Tools</span>
-            <span class="value">Adobe InDesign, Photoshop, Illustrator</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Type</span>
-            <span class="value">Magazine Design</span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Banner -->
-      <div class="wide-image">
-        <img
-          src="../../images/Monocoque%20Magazine/MM%20Project%20Cover.jpg"
-          alt="Monocoque Magazine"
-          class="wide-image-media"
-        />
-      </div>
-
-      <!-- Body -->
-      <div class="project-content">
+---
+import Case from '../../layouts/CaseStudy.astro';
+import Img from '../../components/Img.astro';
+const data = {
+  "title": "Monocoque Magazine",
+  "label": "Case Study / 04",
+  "tags": [
+    "Magazine Design",
+    "Art Direction",
+    "Branding"
+  ],
+  "meta": [
+    [
+      "Role",
+      "Art Director & Designer"
+    ],
+    [
+      "Year",
+      "2022"
+    ],
+    [
+      "Duration",
+      "4 Months"
+    ],
+    [
+      "Tools",
+      "Adobe InDesign, Photoshop, Illustrator"
+    ],
+    [
+      "Type",
+      "Magazine Design"
+    ]
+  ],
+  "cover": {
+    "src": "Monocoque Magazine/MM Project Cover.jpg",
+    "alt": "Monocoque Magazine"
+  },
+  "pageTitle": "Monocoque Magazine | Kamesh Raj Shanmugam",
+  "description": "Case study: end-to-end art direction for Monocoque, an independent Formula 1 print magazine."
+};
+---
+<Case {...data}>
+<div class="project-content">
         <div class="project-body">
           <!-- Overview -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Overview</h2>
               <span class="content-section-index">01</span>
@@ -125,7 +60,7 @@
           </section>
 
           <!-- The Brand -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">The Brand</h2>
               <span class="content-section-index">02</span>
@@ -143,7 +78,7 @@
           </section>
 
           <!-- Editorial Mandate -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Editorial Mandate</h2>
               <span class="content-section-index">03</span>
@@ -161,7 +96,7 @@
           </section>
 
           <!-- Audience Research -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Audience Research</h2>
               <span class="content-section-index">04</span>
@@ -172,7 +107,7 @@
               above, forming a global demographic with an active, high-income
               lifestyle and a genuine appetite for depth and quality.
             </p>
-            <div class="stat-grid reveal-stagger">
+            <div class="stat-grid">
               <div class="stat-item">
                 <span class="stat-value">25+</span>
                 <span class="stat-label">Age Range</span>
@@ -199,7 +134,7 @@
           </section>
 
           <!-- User Persona -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">User Persona</h2>
               <span class="content-section-index">05</span>
@@ -258,7 +193,7 @@
           </section>
 
           <!-- Visual Design -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Visual Design</h2>
               <span class="content-section-index">06</span>
@@ -269,7 +204,7 @@
               primary pair, with a vibrant yellow and a punchy red as accent
               colours, reflecting the drama and energy of Formula 1.
             </p>
-            <div class="palette-grid reveal-stagger">
+            <div class="palette-grid">
               <div class="swatch">
                 <div class="swatch-block swatch-mm-black"></div>
                 <span class="swatch-label">#191818</span>
@@ -303,10 +238,7 @@
             </div>
             <!-- 1. Cover -->
             <figure class="mag-img-single">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Cover.png"
-                alt="Monocoque Magazine Cover"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Cover.png" alt="Monocoque Magazine Cover" />
             </figure>
             <p class="image-caption">
               <strong>Cover:</strong> The front cover of Monocoque Magazine,
@@ -315,14 +247,8 @@
 
             <!-- 2+3. TOC -->
             <div class="mag-spread">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20TOC.png"
-                alt="Monocoque Magazine Table of Contents"
-              />
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20TOC%202.png"
-                alt="Monocoque Magazine Table of Contents 2"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine TOC.png" alt="Monocoque Magazine Table of Contents" />
+              <Img src="Monocoque Magazine/Monocoque Magazine TOC 2.png" alt="Monocoque Magazine Table of Contents 2" />
             </div>
             <p class="image-caption">
               <strong>Table of Contents:</strong> A two-page spread organising
@@ -332,14 +258,8 @@
 
             <!-- 4+5. Editorial 1 & 2 -->
             <div class="mag-spread">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%201.png"
-                alt="Monocoque Magazine Editorial 1"
-              />
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%202.png"
-                alt="Monocoque Magazine Editorial 2"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 1.png" alt="Monocoque Magazine Editorial 1" />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 2.png" alt="Monocoque Magazine Editorial 2" />
             </div>
             <p class="image-caption">
               <strong>Feature Opening:</strong> Opening spread of the Red Bull
@@ -349,10 +269,7 @@
 
             <!-- 6. Editorial 3 -->
             <figure class="mag-img-single">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%203.png"
-                alt="Monocoque Magazine Editorial 3"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 3.png" alt="Monocoque Magazine Editorial 3" />
             </figure>
             <p class="image-caption">
               <strong>Feature (cont.):</strong> Continuation of the Red Bull
@@ -362,14 +279,8 @@
 
             <!-- 7+8. Editorial 4 & 5 -->
             <div class="mag-spread">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%204.png"
-                alt="Monocoque Magazine Editorial 4"
-              />
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%205.png"
-                alt="Monocoque Magazine Editorial 5"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 4.png" alt="Monocoque Magazine Editorial 4" />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 5.png" alt="Monocoque Magazine Editorial 5" />
             </div>
             <p class="image-caption">
               <strong>Editorial Spread:</strong> Double-page layout exploring
@@ -378,14 +289,8 @@
 
             <!-- 9+10. Editorial 6 & 7 -->
             <div class="mag-spread">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%206.png"
-                alt="Monocoque Magazine Editorial 6"
-              />
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%207.png"
-                alt="Monocoque Magazine Editorial 7"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 6.png" alt="Monocoque Magazine Editorial 6" />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 7.png" alt="Monocoque Magazine Editorial 7" />
             </div>
             <p class="image-caption">
               <strong>Editorial Spread:</strong> Further editorial coverage
@@ -395,10 +300,7 @@
 
             <!-- 11. Editorial 8 -->
             <figure class="mag-img-single">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Editorial%208.png"
-                alt="Monocoque Magazine Editorial 8"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Editorial 8.png" alt="Monocoque Magazine Editorial 8" />
             </figure>
             <p class="image-caption">
               <strong>Editorial Page:</strong> Single-page layout with a
@@ -407,14 +309,8 @@
 
             <!-- 12+13. Subscription -->
             <div class="mag-pair">
-              <img
-                src="../../images/Monocoque%20Magazine/Subscription%20Inside.png"
-                alt="Subscription Inside"
-              />
-              <img
-                src="../../images/Monocoque%20Magazine/Subscription%20Outside.png"
-                alt="Subscription Outside"
-              />
+              <Img src="Monocoque Magazine/Subscription Inside.png" alt="Subscription Inside" />
+              <Img src="Monocoque Magazine/Subscription Outside.png" alt="Subscription Outside" />
             </div>
             <p class="image-caption">
               <strong>Subscription Card:</strong> Business reply mail insert and
@@ -423,14 +319,8 @@
 
             <!-- 14+15. Web Ads -->
             <div class="mag-pair--ads">
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Web%20Ad%20Square.png"
-                alt="Monocoque Magazine Web Ad Square"
-              />
-              <img
-                src="../../images/Monocoque%20Magazine/Monocoque%20Magazine%20Web%20Ad%20Vertical.png"
-                alt="Monocoque Magazine Web Ad Vertical"
-              />
+              <Img src="Monocoque Magazine/Monocoque Magazine Web Ad Square.png" alt="Monocoque Magazine Web Ad Square" />
+              <Img src="Monocoque Magazine/Monocoque Magazine Web Ad Vertical.png" alt="Monocoque Magazine Web Ad Vertical" />
             </div>
             <p class="image-caption">
               <strong>Web Ads:</strong> Square and vertical digital ad formats
@@ -439,7 +329,7 @@
           </section>
 
           <!-- Reflection -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Reflection</h2>
               <span class="content-section-index">08</span>
@@ -468,7 +358,7 @@
 
         <!-- Sidebar -->
         <aside class="project-sidebar">
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Project Info</p>
             <div class="sidebar-item">
               <span class="sidebar-label">Type</span>
@@ -491,7 +381,7 @@
               <span class="sidebar-value">2022</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Tools Used</p>
             <div class="sidebar-item">
               <span class="sidebar-value">Adobe InDesign</span>
@@ -503,7 +393,7 @@
               <span class="sidebar-value">Adobe Illustrator</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Deliverables</p>
             <div class="sidebar-item">
               <span class="sidebar-value">Cover Design</span>
@@ -523,16 +413,4 @@
           </div>
         </aside>
       </div>
-    </main>
-
-    <!-- ================================================================
-       FOOTER
-    ================================================================ -->
-    <footer class="proj-footer">
-      <span class="footer-copy">&copy; 2026 Kamesh Raj Shanmugam</span>
-      <a href="../../index.html" class="footer-back">Back to Portfolio</a>
-    </footer>
-
-    <script src="../project-script.js"></script>
-  </body>
-</html>
+</Case>

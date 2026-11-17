@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+
+// Every image under src/assets/images is addressable by its path relative to that folder,
+// e.g. <Img src="Alltrails/Cover.png" alt="..." />. Astro resizes and converts them at build.
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/**/*.{png,jpg,jpeg,svg,webp}',
+  { eager: true },
+);
+
+interface Props {
+  src: string;
+  alt: string;
+  sizes?: string;
+  widths?: number[];
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  sizes = '(min-width: 1100px) 900px, 100vw',
+  widths = [480, 900, 1600],
+  loading = 'lazy',
+  class: className,
+} = Astro.props;
+
+const found = images[`/src/assets/images/${src}`];
+if (!found) throw new Error(`Img: no image at src/assets/images/${src}`);
+---
+
+<Image src={found.default} alt={alt} widths={widths} sizes={sizes} loading={loading} class={className} />

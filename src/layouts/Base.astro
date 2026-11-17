@@ -1,0 +1,66 @@
+---
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const path = Astro.url.pathname;
+const onHome = path === '/' || path === '';
+const nav = [
+  { href: '/#software', label: 'Software' },
+  { href: '/#design', label: 'Design' },
+  { href: '/#about', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#E9EDF3" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="/" aria-label="Kamesh Raj Shanmugam, home">
+        Kamesh Raj Shanmugam
+        <small>AI developer and designer</small>
+      </a>
+      <nav aria-label="Primary">
+        <ul>
+          {nav.map((item) => (
+            <li>
+              <a href={onHome ? item.href.replace('/', '') : item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer wrap">
+      <p>&copy; 2026 Kamesh Raj Shanmugam</p>
+      <p>
+        <a href="https://github.com/kameshrajshan">GitHub</a>
+        <a href="https://www.linkedin.com/in/kamesh-raj-shanmugam-a33677364/">LinkedIn</a>
+        <a href="mailto:kameshrajshan@gmail.com">Email</a>
+      </p>
+    </footer>
+  </body>
+</html>

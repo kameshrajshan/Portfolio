@@ -1,0 +1,47 @@
+---
+import Base from './Base.astro';
+import Img from '../components/Img.astro';
+import '../styles/case.css';
+
+interface Props {
+  title: string;
+  tags: string[];
+  meta: [string, string][];
+  cover: { src: string; alt: string; caption?: string };
+  pageTitle: string;
+  description: string;
+}
+
+const { title, tags, meta, cover, pageTitle, description } = Astro.props;
+---
+
+<Base title={pageTitle} description={description}>
+  <article>
+    <header class="case-hero wrap">
+      <a class="case-back" href="/#design">All design work</a>
+      <h1>{title}</h1>
+      <p class="case-tags">{tags.join(', ')}</p>
+      <dl class="case-meta">
+        {meta.map(([label, value]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <figure class="case-cover wrap">
+      <Img
+        src={cover.src}
+        alt={cover.alt}
+        loading="eager"
+        sizes="(min-width: 1200px) 1120px, 100vw"
+        widths={[640, 1120, 1800]}
+      />
+      {cover.caption && <figcaption>{cover.caption}</figcaption>}
+    </figure>
+
+    <slot />
+  </article>
+</Base>

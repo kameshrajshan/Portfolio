@@ -1,0 +1,221 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import { design } from '../data/work';
+import { getRepos } from '../data/repos';
+
+const repos = await getRepos();
+const assistant = repos.find((r) => r.name === 'knowledge-assistant');
+
+const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+
+// Each claim in the hero cites the work that backs it up.
+const sources = [
+  {
+    n: 1,
+    title: 'knowledge-assistant',
+    kind: 'GitHub repository, Python',
+    href: assistant?.url ?? 'https://github.com/kameshrajshan/knowledge-assistant',
+  },
+  { n: 2, title: 'Service Hub', kind: 'Case study, iOS app', href: '/work/service-hub' },
+  { n: 3, title: 'AllTrails Group Hike', kind: 'Case study, mobile feature', href: '/work/alltrails' },
+  { n: 4, title: 'Monocoque Magazine', kind: 'Case study, print magazine', href: '/work/monocoque' },
+  { n: 5, title: 'Lights & Camera Magazine', kind: 'Case study, digital magazine', href: '/work/lights-camera' },
+];
+const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
+---
+
+<Base
+  title="Kamesh Raj Shanmugam | AI developer and designer"
+  description="Kamesh Raj Shanmugam builds AI tools that cite their sources and designs the products around them. Open-source projects on GitHub and product design case studies."
+>
+  <section class="hero wrap">
+    <div>
+      <h1 class="statement">
+        <span class="claim" data-cites="1" style="--i: 0">I build AI tools that answer from your documents and show where every answer came from.</span><sup><a id="cite-1" href="#src-1" aria-label={label(1)}>1</a></sup>
+        <span class="claim" data-cites="2 3" style="--i: 1">I design the interface around them, starting with research, then flows, then pixels.</span><sup><a id="cite-2" href="#src-2" aria-label={label(2)}>2</a></sup><sup><a id="cite-3" href="#src-3" aria-label={label(3)}>3</a></sup>
+        <span class="claim" data-cites="4 5" style="--i: 2">Before software, I art-directed two magazines from first draft to print.</span><sup><a id="cite-4" href="#src-4" aria-label={label(4)}>4</a></sup><sup><a id="cite-5" href="#src-5" aria-label={label(5)}>5</a></sup>
+      </h1>
+      <p class="hero-actions">
+        <a class="button" href="#software">See the software</a>
+        <a href="mailto:kameshrajshan@gmail.com">Email me</a>
+      </p>
+      <p class="hero-note">Chennai, India. Open to roles and projects.</p>
+    </div>
+
+    <aside class="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Sources</h2>
+      <ol>
+        {sources.map((s) => (
+          <li id={`src-${s.n}`} data-src={s.n}>
+            <span class="src-n">{s.n}</span>
+            <span>
+              <a class="src-title" href={s.href}>{s.title}</a>
+              <span class="src-kind">{s.kind}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </aside>
+  </section>
+
+  <section class="section" id="software">
+    <div class="wrap section-grid">
+      <h2>Software</h2>
+      <div>
+        <p class="section-intro">
+          Projects from my GitHub account. This list is read from GitHub each time the site is built.
+        </p>
+        <ul class="ledger">
+          {repos.map((r) => (
+            <li>
+              <a class="row" href={r.url}>
+                <span class="row-name">{r.name}</span>
+                <p class="row-desc">{r.description ?? 'No description yet.'}</p>
+                <p class="row-meta">
+                  {r.language && <span>{r.language}</span>}
+                  {r.stars > 0 && <span>{r.stars} {r.stars === 1 ? 'star' : 'stars'}</span>}
+                  <span>Updated {fmt.format(new Date(r.pushedAt))}</span>
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="ledger-note">
+          More of my AI work lives in private repositories. <a href="mailto:kameshrajshan@gmail.com">Ask me about it.</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="design">
+    <div class="wrap section-grid">
+      <h2>Design</h2>
+      <div>
+        <p class="section-intro">
+          Research-led product design and editorial art direction. Each case study covers the problem, the process, and the final screens or pages.
+        </p>
+        <ul class="ledger">
+          {design.map((p) => (
+            <li>
+              <a class="row row--design" href={`/work/${p.slug}`}>
+                <span class="row-cover">
+                  <Img src={p.cover} alt={p.coverAlt} widths={[320, 640, 960]} sizes="(min-width: 48rem) 208px, 100vw" />
+                </span>
+                <div>
+                  <span class="row-name">{p.title}</span>
+                  <p class="row-desc">{p.blurb}</p>
+                </div>
+                <p class="row-meta">
+                  <span>{p.kind}</span>
+                  <span>{p.year}</span>
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap section-grid">
+      <h2>About</h2>
+      <div>
+        <div class="prose">
+          <p>
+            I studied Interactive Arts and Technology and Publishing at Simon Fraser University, which is where I learned to start design from research. My early projects were mobile products and magazines.
+          </p>
+          <p>
+            Lately I build as well. I write retrieval-based assistants that cite the document, version, and page behind every answer, and I design the interfaces people use to check them. I care about the gap between what a model says and what a person can verify.
+          </p>
+        </div>
+        <dl class="skills">
+          <div><dt>Build</dt><dd>Python, TypeScript, JavaScript, HTML and CSS, Astro</dd></div>
+          <div><dt>Design</dt><dd>User research, prototyping, design systems, accessibility, Figma, ProtoPie, Adobe Suite</dd></div>
+          <div><dt>AI tools</dt><dd>Claude Code, Google Gemini, Google Stitch</dd></div>
+        </dl>
+
+        <h3 class="subhead">Work history</h3>
+        <ul class="history">
+          <li>
+            <div>
+              <strong>Apple, Specialist</strong>
+              <p>Contract, part-time. Averaged 70 units a month, 18% above the sales benchmark, with 96% consistency applying the Connect and Personalize framework.</p>
+            </div>
+            <span class="when">Jul 2025 to Jan 2026</span>
+          </li>
+          <li>
+            <div>
+              <strong>Starbucks, Barista</strong>
+              <p>Permanent, part-time. Kept customer satisfaction above 95% and trained junior baristas to a 98% drink accuracy rate.</p>
+            </div>
+            <span class="when">Jun 2021 to Feb 2026</span>
+          </li>
+        </ul>
+
+        <h3 class="subhead">Education</h3>
+        <ul class="history">
+          <li>
+            <div>
+              <strong>Simon Fraser University</strong>
+              <p>B.A. in Interactive Arts and Technology; Publishing. Vancouver, BC.</p>
+            </div>
+            <span class="when">2021 to 2024</span>
+          </li>
+          <li>
+            <div>
+              <strong>Fraser International College</strong>
+              <p>B.A. in Communication. Vancouver, BC.</p>
+            </div>
+            <span class="when">Jan to Dec 2020</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap section-grid">
+      <h2>Contact</h2>
+      <div>
+        <p class="section-intro">
+          I'm open to roles and projects in AI product development and design. The fastest way to reach me is email.
+        </p>
+        <a class="contact-email" href="mailto:kameshrajshan@gmail.com">kameshrajshan@gmail.com</a>
+        <ul class="contact-links">
+          <li><a href="https://github.com/kameshrajshan">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/kamesh-raj-shanmugam-a33677364/">LinkedIn</a></li>
+          <li><a href="/documents/KameshRajShanmugam_Resume_IN.pdf">Resume (PDF)</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Hovering or focusing a citation highlights the claim and its source together.
+  const claims = [...document.querySelectorAll<HTMLElement>('[data-cites]')];
+  const sources = [...document.querySelectorAll<HTMLElement>('[data-src]')];
+
+  function mark(numbers: string[], on: boolean) {
+    claims.forEach((c) =>
+      c.classList.toggle('is-on', on && c.dataset.cites!.split(' ').some((n) => numbers.includes(n))),
+    );
+    sources.forEach((s) => s.classList.toggle('is-on', on && numbers.includes(s.dataset.src!)));
+  }
+
+  function bind(el: HTMLElement, numbers: string[]) {
+    el.addEventListener('mouseenter', () => mark(numbers, true));
+    el.addEventListener('focusin', () => mark(numbers, true));
+    el.addEventListener('mouseleave', () => mark(numbers, false));
+    el.addEventListener('focusout', () => mark(numbers, false));
+  }
+
+  claims.forEach((c) => bind(c, c.dataset.cites!.split(' ')));
+  sources.forEach((s) => bind(s, [s.dataset.src!]));
+  document.querySelectorAll<HTMLElement>('.statement sup a').forEach((a) => {
+    const n = a.textContent!.trim();
+    bind(a, [n]);
+  });
+</script>

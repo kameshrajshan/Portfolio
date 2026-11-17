@@ -1,110 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lights &amp; Camera Magazine | Kamesh Raj Shanmugam</title>
-    <meta name="description" content="Case study: art direction and editorial identity for Lights & Camera, a Vancouver film-industry digital magazine." />
-    <meta property="og:title" content="Lights &amp; Camera Magazine | Kamesh Raj Shanmugam" />
-    <meta property="og:description" content="Case study: art direction and editorial identity for Lights & Camera, a Vancouver film-industry digital magazine." />
-    <meta property="og:type" content="article" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../project-styles.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <!-- ================================================================
-       NAV
-    ================================================================ -->
-    <nav class="proj-nav" id="projNav" aria-label="Primary">
-      <a href="../../index.html" class="nav-logo">KRS / Portfolio</a>
-      <ul class="nav-links">
-        <li><a href="../../index.html#work">Work</a></li>
-        <li><a href="../../index.html#about">About</a></li>
-        <li><a href="../../index.html#experience">Experience</a></li>
-        <li><a href="../../index.html#contact">Contact</a></li>
-      </ul>
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-        aria-controls="mobileNav"
-      >
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-
-    <!-- Mobile nav -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-      <a href="../../index.html#work">Work</a>
-      <a href="../../index.html#about">About</a>
-      <a href="../../index.html#experience">Experience</a>
-      <a href="../../index.html#contact">Contact</a>
-      <a href="../../index.html">Back to Portfolio</a>
-    </nav>
-
-    <!-- ================================================================
-       PAGE
-    ================================================================ -->
-    <main id="main" class="project-page">
-      <!-- Hero -->
-      <header class="project-hero">
-        <div class="project-hero-left">
-          <div class="page-animate">
-            <a href="../../index.html" class="nav-back">Back to Portfolio</a>
-          </div>
-          <div class="page-animate">
-            <span class="project-hero-label">Case Study / 03</span>
-          </div>
-          <h1 class="project-hero-title page-animate">
-            Lights &amp; Camera<br />Magazine
-          </h1>
-          <div class="project-hero-tags page-animate">
-            <span class="tag">Art Direction</span>
-            <span class="tag">Editorial Design</span>
-            <span class="tag">Brand Identity</span>
-          </div>
-        </div>
-        <div class="project-meta-grid page-animate">
-          <div class="project-meta-item">
-            <span class="label">Role</span>
-            <span class="value">Art Director</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Year</span>
-            <span class="value">2022</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Team</span>
-            <span class="value">4 Members</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="label">Type</span>
-            <span class="value">Digital Magazine / Art Direction</span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Banner -->
-      <div class="wide-image">
-        <img
-          src="../../images/L%26C/Cover%20Project%20Page.png"
-          alt="Lights &amp; Camera Magazine"
-          class="wide-image-media"
-        />
-      </div>
-
-      <!-- Body -->
-      <div class="project-content">
+---
+import Case from '../../layouts/CaseStudy.astro';
+import Img from '../../components/Img.astro';
+const data = {
+  "title": "Lights & Camera Magazine",
+  "label": "Case Study / 03",
+  "tags": [
+    "Art Direction",
+    "Editorial Design",
+    "Brand Identity"
+  ],
+  "meta": [
+    [
+      "Role",
+      "Art Director"
+    ],
+    [
+      "Year",
+      "2022"
+    ],
+    [
+      "Team",
+      "4 Members"
+    ],
+    [
+      "Type",
+      "Digital Magazine / Art Direction"
+    ]
+  ],
+  "cover": {
+    "src": "L&C/Cover Project Page.png",
+    "alt": "Lights & Camera Magazine"
+  },
+  "pageTitle": "Lights & Camera Magazine | Kamesh Raj Shanmugam",
+  "description": "Case study: art direction and editorial identity for Lights & Camera, a Vancouver film-industry digital magazine."
+};
+---
+<Case {...data}>
+<div class="project-content">
         <div class="project-body">
           <!-- Overview -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Overview</h2>
               <span class="content-section-index">01</span>
@@ -123,7 +58,7 @@
           </section>
 
           <!-- The Problem -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">The Problem</h2>
               <span class="content-section-index">02</span>
@@ -140,12 +75,12 @@
           </section>
 
           <!-- Mission & Purpose -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Mission &amp; Purpose</h2>
               <span class="content-section-index">03</span>
             </div>
-            <div class="stat-grid reveal-stagger">
+            <div class="stat-grid">
               <div class="stat-item">
                 <span class="stat-label">Mission</span>
                 <p class="stat-copy">
@@ -170,7 +105,7 @@
           </section>
 
           <!-- Marketing Channels -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Marketing Channels</h2>
               <span class="content-section-index">04</span>
@@ -179,7 +114,7 @@
               The distribution strategy spanned four channels, each serving a
               distinct purpose in building the magazine's audience and reach.
             </p>
-            <div class="goal-list reveal-stagger">
+            <div class="goal-list">
               <div class="goal-item">
                 <span class="goal-number">01</span>
                 <div>
@@ -227,7 +162,7 @@
           </section>
 
           <!-- Social Media Growth -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Social Media Growth</h2>
               <span class="content-section-index">05</span>
@@ -239,7 +174,7 @@
               Vancouver's film industry. Partnerships with local film schools
               and production companies substantially amplified organic reach.
             </p>
-            <div class="stat-grid reveal-stagger">
+            <div class="stat-grid">
               <div class="stat-item">
                 <span class="stat-value">18.5K</span>
                 <span class="stat-label">Instagram Followers</span>
@@ -256,7 +191,7 @@
           </section>
 
           <!-- Brand Identity -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Brand Identity</h2>
               <span class="content-section-index">06</span>
@@ -267,7 +202,7 @@
               chosen to signal energy, creativity, and accessibility against
               the dark, cinematic backgrounds.
             </p>
-            <div class="palette-grid reveal-stagger">
+            <div class="palette-grid">
               <div class="swatch">
                 <div class="swatch-block swatch-lc-gold"></div>
                 <span class="swatch-label">#F0CC00</span>
@@ -292,26 +227,18 @@
               editorial content a clean, readable quality free of industry
               jargon.
             </p>
-            <div class="image-grid image-grid--tight reveal-stagger">
+            <div class="image-grid image-grid--tight">
               <div class="media-frame">
-                <img
-                  src="../../images/L%26C/Screen%20One.png"
-                  alt="L&amp;C Magazine Screen One"
-                 
-                />
+                <Img src="L&C/Screen One.png" alt="L&C Magazine Screen One" />
               </div>
               <div class="media-frame">
-                <img
-                  src="../../images/L%26C/Screen%20Two.png"
-                  alt="L&amp;C Magazine Screen Two"
-                 
-                />
+                <Img src="L&C/Screen Two.png" alt="L&C Magazine Screen Two" />
               </div>
             </div>
           </section>
 
           <!-- Revenue Strategy -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">
                 Revenue &amp; Business Model
@@ -326,7 +253,7 @@
               anticipated annual profit of roughly
               <strong>$21,223</strong>.
             </p>
-            <div class="stat-grid reveal-stagger">
+            <div class="stat-grid">
               <div class="stat-item">
                 <span class="stat-value">$101K</span>
                 <span class="stat-label">Avg Projected Revenue / Year</span>
@@ -350,7 +277,7 @@
           </section>
 
           <!-- Screen Design -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Screen Design</h2>
               <span class="content-section-index">08</span>
@@ -362,15 +289,11 @@
               pages, and job listings.
             </p>
             <div
-              class="image-grid image-grid--stack reveal-stagger"
+              class="image-grid image-grid--stack"
             >
               <div>
                 <div class="media-frame">
-                  <img
-                    src="../../images/L%26C/Home%20Page.svg"
-                    alt="L&amp;C Magazine Home Page"
-                   
-                  />
+                  <Img src="L&C/Home Page.svg" alt="L&C Magazine Home Page" />
                 </div>
                 <p class="image-caption">
                   <strong>Home Page:</strong> The primary landing experience,
@@ -380,11 +303,7 @@
               </div>
               <div>
                 <div class="media-frame">
-                  <img
-                    src="../../images/L%26C/Article%20Page.svg"
-                    alt="L&amp;C Magazine Article Page"
-                   
-                  />
+                  <Img src="L&C/Article Page.svg" alt="L&C Magazine Article Page" />
                 </div>
                 <p class="image-caption">
                   <strong>Article Page:</strong> The editorial reading view,
@@ -394,11 +313,7 @@
               </div>
               <div>
                 <div class="media-frame">
-                  <img
-                    src="../../images/L%26C/Jobs%20Page.svg"
-                    alt="L&amp;C Magazine Jobs Page"
-                   
-                  />
+                  <Img src="L&C/Jobs Page.svg" alt="L&C Magazine Jobs Page" />
                 </div>
                 <p class="image-caption">
                   <strong>Jobs Page:</strong> Industry job listings integrated
@@ -408,11 +323,7 @@
               </div>
               <div>
                 <div class="media-frame">
-                  <img
-                    src="../../images/L%26C/Home%20Page%20AD.png"
-                    alt="L&amp;C Magazine Home Page with Ad Placements"
-                   
-                  />
+                  <Img src="L&C/Home Page AD.png" alt="L&C Magazine Home Page with Ad Placements" />
                 </div>
                 <p class="image-caption">
                   <strong>Home Page, Ad Placements:</strong> The homepage
@@ -425,12 +336,12 @@
           </section>
 
           <!-- The Team -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">The Team</h2>
               <span class="content-section-index">09</span>
             </div>
-            <div class="team-grid reveal-stagger">
+            <div class="team-grid">
               <div class="team-item">
                 <p class="team-name">Kai von Dehn</p>
                 <p class="team-role">Marketing</p>
@@ -451,7 +362,7 @@
           </section>
 
           <!-- Reflection -->
-          <section class="content-section reveal">
+          <section class="content-section">
             <div class="content-section-header">
               <h2 class="content-section-title">Reflection</h2>
               <span class="content-section-index">10</span>
@@ -484,7 +395,7 @@
 
         <!-- Sidebar -->
         <aside class="project-sidebar">
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Project Info</p>
             <div class="sidebar-item">
               <span class="sidebar-label">Type</span>
@@ -507,7 +418,7 @@
               <span class="sidebar-value">2022</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Results</p>
             <div class="sidebar-item">
               <span class="sidebar-label">Instagram</span>
@@ -522,7 +433,7 @@
               <span class="sidebar-value">1,966 published</span>
             </div>
           </div>
-          <div class="sidebar-group reveal">
+          <div class="sidebar-group">
             <p class="sidebar-group-title">Focus Areas</p>
             <div class="sidebar-item">
               <span class="sidebar-value">Art Direction</span>
@@ -539,16 +450,4 @@
           </div>
         </aside>
       </div>
-    </main>
-
-    <!-- ================================================================
-       FOOTER
-    ================================================================ -->
-    <footer class="proj-footer">
-      <span class="footer-copy">&copy; 2026 Kamesh Raj Shanmugam</span>
-      <a href="../../index.html" class="footer-back">Back to Portfolio</a>
-    </footer>
-
-    <script src="../project-script.js"></script>
-  </body>
-</html>
+</Case>
