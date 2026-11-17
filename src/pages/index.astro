@@ -40,7 +40,7 @@ const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
         <a class="button" href="#software">See the software</a>
         <a href="mailto:kameshrajshan@gmail.com">Email me</a>
       </p>
-      <p class="hero-note">Chennai, India. Open to roles and projects.</p>
+      <p class="hero-note">Vancouver, BC. Open to roles and projects.</p>
     </div>
 
     <aside class="sources" aria-labelledby="sources-title">
@@ -131,13 +131,27 @@ const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
           </p>
         </div>
         <dl class="skills">
-          <div><dt>Build</dt><dd>Python, TypeScript, JavaScript, HTML and CSS, Astro</dd></div>
-          <div><dt>Design</dt><dd>User research, prototyping, design systems, accessibility, Figma, ProtoPie, Adobe Suite</dd></div>
-          <div><dt>AI tools</dt><dd>Claude Code, Google Gemini, Google Stitch</dd></div>
+          <div><dt>Languages</dt><dd>Python, C#, JavaScript, TypeScript, HTML and CSS</dd></div>
+          <div><dt>Backend and data</dt><dd>FastAPI, Celery, Redis, PostgreSQL and pgvector, Docling, Astro</dd></div>
+          <div><dt>Infrastructure and tools</dt><dd>Docker, Caddy, AWS, Linux, Git and GitHub, Visual Studio Code</dd></div>
+          <div><dt>Design</dt><dd>User research, prototyping, design systems, accessibility, Figma, Penpot, ProtoPie, Adobe Suite</dd></div>
+          <div><dt>AI tools</dt><dd>Claude Code, Claude Design, Cursor</dd></div>
         </dl>
 
         <h3 class="subhead">Work history</h3>
         <ul class="history">
+          <li>
+            <div>
+              <strong>Dutam Engineering Services, RAG Engineer and AI Developer</strong>
+              <p class="place">Freelance. Salem, Tamil Nadu, India.</p>
+              <ul class="bullets">
+                <li>Built a production RAG pipeline on FastAPI, HTMX, PostgreSQL with pgvector, and OpenAI. Retrieval precision rose 25%, queries return in under a second, and each client's data is isolated.</li>
+                <li>Built an asynchronous ingestion workflow with Docling, MinIO, and Celery on Redis. Bulk processing runs 3x faster, and table and OCR extraction is 40% more accurate.</li>
+                <li>Containerized the services with Docker Compose and a Caddy reverse proxy, which issues TLS certificates automatically and routes inference in under a second under concurrent load.</li>
+              </ul>
+            </div>
+            <span class="when">Mar 2026 to Present</span>
+          </li>
           <li>
             <div>
               <strong>Apple, Specialist</strong>
@@ -161,14 +175,14 @@ const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
               <strong>Simon Fraser University</strong>
               <p>B.A. in Interactive Arts and Technology; Publishing. Vancouver, BC.</p>
             </div>
-            <span class="when">2021 to 2024</span>
+            <span class="when">Jan 2021 to Dec 2024</span>
           </li>
           <li>
             <div>
               <strong>Fraser International College</strong>
               <p>B.A. in Communication. Vancouver, BC.</p>
             </div>
-            <span class="when">Jan to Dec 2020</span>
+            <span class="when">Jan 2020 to Dec 2020</span>
           </li>
         </ul>
       </div>

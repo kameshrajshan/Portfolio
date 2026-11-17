@@ -1,17 +1,21 @@
 /* ------------------------------------------------------------------
    Tokens
    The page reads like an annotated document: cool paper, ink, citation
-   blue for links, and a highlighter yellow used ONLY to mark the passage
-   a citation points to.
+   blue for links, and a highlighter used ONLY to mark the passage a
+   citation points to. Dark mode is the same document read at night:
+   blue-ink paper, pale text, and an amber marker.
 ------------------------------------------------------------------- */
 :root {
-  --paper: #e9edf3;
-  --paper-deep: #dee4ed;
-  --ink: #0e1a33;
-  --quiet: #56627a;
-  --rule: #c3ccda;
-  --cite: #2437ff;
-  --mark: #ffe14d;
+  color-scheme: light dark;
+
+  --paper: light-dark(#e9edf3, #0c1424);
+  --paper-deep: light-dark(#dee4ed, #141f37);
+  --surface: light-dark(color-mix(in srgb, #e9edf3 55%, white), #101b30);
+  --ink: light-dark(#0e1a33, #e7ecf5);
+  --quiet: light-dark(#56627a, #9aa6bc);
+  --rule: light-dark(#c3ccda, #2a3650);
+  --cite: light-dark(#2437ff, #8c9bff);
+  --mark: light-dark(#ffe14d, #6a5a12);
 
   --sans: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
   --serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
@@ -19,6 +23,15 @@
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --max: 72rem;
   --radius: 3px;
+}
+
+/* An explicit choice from the theme switch wins over the system setting. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 *,
@@ -494,12 +507,13 @@ a.row:hover .row-name {
 
 .skills div {
   display: grid;
+  align-items: baseline;
   gap: 0.15rem 1.5rem;
 }
 
 @media (min-width: 40rem) {
   .skills div {
-    grid-template-columns: 7.5rem minmax(0, 1fr);
+    grid-template-columns: 11rem minmax(0, 1fr);
   }
 }
 
@@ -525,6 +539,7 @@ a.row:hover .row-name {
 
 .history li {
   display: grid;
+  align-items: baseline;
   gap: 0.15rem 2rem;
   padding-block: 1.1rem;
   border-top: 1px solid var(--rule);
@@ -532,7 +547,7 @@ a.row:hover .row-name {
 
 @media (min-width: 40rem) {
   .history li {
-    grid-template-columns: minmax(0, 1fr) 9.5rem;
+    grid-template-columns: minmax(0, 1fr) 11rem;
   }
 }
 
@@ -544,7 +559,26 @@ a.row:hover .row-name {
   margin: 0.2rem 0 0;
 }
 
+.history .place {
+  margin: 0.1rem 0 0;
+  font: 400 0.9rem var(--sans);
+  color: var(--quiet);
+}
+
+.history .bullets {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1em;
+  list-style: disc;
+}
+
+.history .bullets li {
+  display: list-item;
+  padding: 0 0 0.45em;
+  border: 0;
+}
+
 .history .when {
+  white-space: nowrap;
   font: 400 0.9rem/1.45 var(--sans);
   color: var(--quiet);
   font-variant-numeric: tabular-nums;
@@ -565,4 +599,27 @@ a.row:hover .row-name {
   padding: 0;
   list-style: none;
   font: 500 1rem var(--sans);
+}
+
+/* Theme switch (shown only when JavaScript is available) */
+.site-header .theme-toggle {
+  margin: 0;
+  padding: 0.35rem 0 0.35rem 1.4rem;
+  border: 0;
+  border-left: 1px solid var(--rule);
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font: 500 0.95rem var(--sans);
+  cursor: pointer;
+}
+
+.site-header .theme-toggle:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+.site-header .theme-toggle[hidden] {
+  display: none;
 }
