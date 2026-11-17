@@ -10,9 +10,17 @@ interface Props {
   cover: { src: string; alt: string; caption?: string };
   pageTitle: string;
   description: string;
+  prototype?: {
+    src: string;
+    poster: string;
+    posterAlt: string;
+    summary: string;
+    steps: string[];
+    note: string;
+  };
 }
 
-const { title, tags, meta, cover, pageTitle, description } = Astro.props;
+const { title, tags, meta, cover, pageTitle, description, prototype } = Astro.props;
 ---
 
 <Base title={pageTitle} description={description}>
@@ -42,6 +50,41 @@ const { title, tags, meta, cover, pageTitle, description } = Astro.props;
       {cover.caption && <figcaption>{cover.caption}</figcaption>}
     </figure>
 
+    {prototype && (
+      <section class="proto wrap" aria-labelledby="proto-title">
+        <div class="proto-text">
+          <h2 id="proto-title">Try the prototype</h2>
+          <p>{prototype.summary}</p>
+          <ol>
+            {prototype.steps.map((step) => <li>{step}</li>)}
+          </ol>
+          <p class="proto-note">{prototype.note}</p>
+          <p><a href={prototype.src}>Open full screen</a></p>
+        </div>
+        <div class="proto-stage">
+          <button class="proto-poster" type="button" data-proto={prototype.src} aria-label="Load the interactive prototype">
+            <img src={prototype.poster} width="393" height="852" alt={prototype.posterAlt} />
+            <span class="proto-go">Start the prototype</span>
+          </button>
+        </div>
+      </section>
+    )}
+
     <slot />
   </article>
+
+  <script>
+    // The prototype loads only when someone asks for it, so the page stays light.
+    document.querySelectorAll<HTMLButtonElement>('.proto-poster').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const frame = document.createElement('iframe');
+        frame.src = btn.dataset.proto!;
+        frame.title = 'Interactive prototype';
+        frame.className = 'proto-frame';
+        frame.allow = 'clipboard-write';
+        btn.replaceWith(frame);
+        frame.focus();
+      });
+    });
+  </script>
 </Base>

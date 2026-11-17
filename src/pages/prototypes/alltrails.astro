@@ -1,0 +1,1851 @@
+---
+import '@fontsource-variable/manrope';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Icons come straight from the Figma file (exported as SVG). They are inlined so the nav can
+// recolor them with currentColor for active and inactive states.
+const icoDir = path.join(process.cwd(), 'public/prototypes/alltrails/ico');
+const svg = (name: string) =>
+  fs
+    .readFileSync(path.join(icoDir, `${name}.svg`), 'utf8')
+    .replace(' preserveAspectRatio="none" overflow="visible" style="display: block;"', '')
+    .replace(/ id="[^"]*"/g, '')
+    .replace(/stroke="white"/g, 'stroke="currentColor"');
+
+const ico = {
+  back: svg('back'),
+  userPlus: svg('top-user-plus'),
+  bellBody: svg('top-bell-body'),
+  bellClapper: svg('top-bell-clapper'),
+  star: svg('star'),
+  explore: svg('nav-explore'),
+  community: svg('nav-community'),
+  navigate: svg('nav-navigate'),
+  saved: svg('nav-saved'),
+  profile: svg('nav-profile'),
+  location: svg('detail-location'),
+  clock: svg('detail-clock'),
+  calendar: svg('detail-calendar'),
+  people: svg('detail-people'),
+  hiking: svg('detail-hiking'),
+};
+
+// Icons that are not in the Figma export (drawn to match the line weight of the set).
+const extra = {
+  chevron:
+    '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 6l4.5 4.5L12.5 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  copy: '<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.2"/><path d="M5.5 15.5H5a1.8 1.8 0 0 1-1.8-1.8V5A1.8 1.8 0 0 1 5 3.2h8.7A1.8 1.8 0 0 1 15.5 5v.5"/></svg>',
+  whatsapp:
+    '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2.5 21.5z"/><path d="M9.2 8.6c.4 1.8 2 3.6 4 4.2l1.1-1.2-1.6-1-.8.7a3 3 0 0 1-1.6-1.6l.7-.8-1-1.6z" fill="currentColor" stroke="none"/></svg>',
+  chat: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M7 4h18a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H15l-6.5 4.5V25H7a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5z" fill="currentColor"/></svg>',
+  link: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>',
+  bike: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>',
+  search:
+    '<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="10" y1="10" x2="16" y2="16" stroke="#D9D9D9"/><circle cx="7.5" cy="7.5" r="7.5" fill="#D9D9D9"/><circle cx="7.5" cy="7.5" r="6.5" fill="currentColor"/></svg>',
+};
+
+const img = '/prototypes/alltrails/img/';
+
+const trails = [
+  {
+    id: 'jug-island',
+    name: 'Jug Island Beach Trail',
+    level: 'Moderate',
+    rating: '4.6 (3,767)',
+    park: 'Belcarra Regional Park',
+    stats: '7.2 km . Est 117 min',
+    img: `${img}jug-island.webp`,
+  },
+  {
+    id: 'port-moody',
+    name: 'Port Moody Shoreline',
+    level: 'Easy',
+    rating: '4.3 (757)',
+    park: 'Inlet Park',
+    stats: '5.8 km . Est 66 min',
+    img: `${img}host-forest-1.webp`,
+  },
+  {
+    id: 'grouse-grind',
+    name: 'Grouse Grind Trail',
+    level: 'Hard',
+    rating: '4.6 (6,111)',
+    park: 'Grouse Mountain Park',
+    stats: '5.8 km . Est 66 min',
+    img: `${img}host-forest-2.webp`,
+  },
+];
+
+const steps = [1, 2, 3, 4];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AllTrails Group Hike prototype | Kamesh Raj Shanmugam</title>
+    <meta
+      name="description"
+      content="A working prototype of the Group Hike feature: host a hike in four steps, join one from the Community tab, and see both in Saved."
+    />
+    <meta name="theme-color" content="#0d0f09" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <noscript><p class="nojs">This prototype needs JavaScript.</p></noscript>
+
+    <main class="stage" id="stage">
+      <div class="frame">
+        <div class="phone" id="phone" data-screen="community" data-pane="host">
+          <!-- ============================ Community ============================ -->
+          <section class="screen" data-screen-id="community" aria-label="Community">
+            <div class="tabs">
+              <button class="tab is-active" type="button" data-toast="Local is the tab you are on in this prototype.">Local</button>
+              <button class="tab" type="button" style="left:89px" data-toast="Following isn't part of this prototype.">Following</button>
+              <button class="tab" type="button" style="left:194px" id="open-events">Events</button>
+            </div>
+            <h1 class="comm-title"><span>Latest</span><br />nearby</h1>
+            <button class="pill search-pill" type="button" style="top:259px;left:15px;width:362px" data-toast="Search isn't part of this prototype.">
+              <span class="search-ico" set:html={extra.search} /><span>Search</span>
+            </button>
+            <img class="avatar" src={`${img}avatar.webp`} alt="" width="48" height="48" />
+            <p class="post-name">Rachael McClean</p>
+            <p class="post-meta">6d. <button type="button" class="link-btn" data-toast="Following isn't part of this prototype.">Follow</button></p>
+            <img class="post-photo" src={`${img}community-post.webp`} alt="Sunlight coming through a forest trail" width="361" height="355" />
+          </section>
+
+          <!-- ============================ Events: Host / Join ============================ -->
+          <section class="screen" data-screen-id="events" aria-label="Events" hidden>
+            <div class="tabs" role="tablist">
+              <button class="tab is-active" type="button" role="tab" id="tab-host" aria-selected="true" aria-controls="pane-host" data-pane-tab="host">Host</button>
+              <button class="tab" type="button" role="tab" id="tab-join" aria-selected="false" aria-controls="pane-join" style="left:89px" data-pane-tab="join">Join</button>
+            </div>
+
+            <div class="scroll" role="tabpanel" id="pane-host" aria-labelledby="tab-host">
+              <button class="pill search-pill" type="button" style="width:361px" data-toast="Search isn't part of this prototype.">
+                <span class="search-ico" set:html={extra.search} /><span>Search</span>
+              </button>
+              <h2 class="feed-title">Best Views nearby</h2>
+              {trails.map((t) => (
+                <article class="card">
+                  <img class="card-img" src={t.img} alt={`${t.name}`} width="361" height="230" loading="lazy" />
+                  <div class="card-body">
+                    <p class="c-meta"><span>{t.level} -</span><span class="c-star" set:html={ico.star} /><span class="c-rating">{t.rating}</span></p>
+                    <h3 class="c-name">{t.name}</h3>
+                    <p class="c-small">{t.park}</p>
+                    <p class="c-small">{t.stats}</p>
+                    <button class="btn-details" type="button" data-toast="Trail details aren't part of this prototype.">Details</button>
+                    <button class="btn-host" type="button" data-host={t.id} aria-label={`Host a hike on ${t.name}`}>Host</button>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div class="scroll" role="tabpanel" id="pane-join" aria-labelledby="tab-join" hidden>
+              <div class="join-top">
+                <button class="pill search-pill" type="button" style="width:171px" data-toast="Search isn't part of this prototype.">
+                  <span class="search-ico" set:html={extra.search} /><span class="dim">Search</span>
+                </button>
+                <button class="pill code-pill" type="button" data-toast="Joining with a code isn't part of this prototype.">Got a code?</button>
+              </div>
+              <h2 class="feed-title">Event nearby</h2>
+              <div id="join-list"></div>
+            </div>
+          </section>
+
+          <!-- ============================ Saved ============================ -->
+          <section class="screen" data-screen-id="saved" aria-label="Saved" hidden>
+            <button class="saved-edit link-btn" type="button" data-toast="Editing isn't part of this prototype.">Edit</button>
+            <h1 class="saved-title">Saved</h1>
+            <div class="saved-tabs">
+              <button type="button" class="stab" data-toast="Lists aren't part of this prototype.">Lists</button>
+              <button type="button" class="stab" style="left:85px" data-toast="Downloads aren't part of this prototype.">Downloads</button>
+              <button type="button" class="stab is-active" style="left:203px" aria-current="true">Events</button>
+            </div>
+            <div class="saved-list" id="saved-list"></div>
+          </section>
+
+          <!-- ============================ Chrome ============================ -->
+          <header class="topnav" id="topnav">
+            <button class="icon-btn back" id="back" type="button" aria-label="Back" set:html={ico.back} />
+            <button class="icon-btn bell" type="button" aria-label="Notifications" data-toast="Notifications aren't part of this prototype.">
+              <span class="bell-body" set:html={ico.bellBody} /><span class="bell-clapper" set:html={ico.bellClapper} />
+            </button>
+            <button class="icon-btn adduser" type="button" aria-label="Find friends" data-toast="Finding friends isn't part of this prototype." set:html={ico.userPlus} />
+          </header>
+
+          <nav class="bottomnav" aria-label="Primary">
+            <button class="nav-item" type="button" data-toast="Explore isn't part of this prototype." style="--cx:38.5px"><span class="n-ico" set:html={ico.explore} /><span class="n-label">Explore</span></button>
+            <button class="nav-item is-active" type="button" data-nav="community" style="--cx:125.5px"><span class="n-ico" set:html={ico.community} /><span class="n-label">Community</span></button>
+            <button class="nav-item" type="button" data-toast="Navigate isn't part of this prototype." style="--cx:212.5px"><span class="n-ico flip" set:html={ico.navigate} /><span class="n-label">Navigate</span></button>
+            <button class="nav-item" type="button" data-nav="saved" style="--cx:283.5px"><span class="n-ico" set:html={ico.saved} /><span class="n-label">Saved</span></button>
+            <button class="nav-item" type="button" data-toast="Profile isn't part of this prototype." style="--cx:349.5px"><span class="n-ico" set:html={ico.profile} /><span class="n-label">Profile</span></button>
+          </nav>
+
+          <div class="scrim" id="scrim"></div>
+
+          <!-- ============================ Sheet ============================ -->
+          <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Group hike" tabindex="-1">
+            <div class="handle"></div>
+
+            <!-- Step 1: date, time, activity -->
+            <section class="panel" data-panel="when" aria-labelledby="t-when">
+              <button class="icon-btn s-back" type="button" data-step-back aria-label="Close" set:html={ico.back} />
+              <ol class="steps" aria-label="Step 1 of 4">
+                {steps.map((n) => [n > 1 && <li class="sep" aria-hidden="true" />, <li class="step" data-n={n}>{n}</li>])}
+              </ol>
+              <h2 class="title2" id="t-when">Choose date, time and type of activity for the event</h2>
+              <p class="lbl" style="top:228px;left:15px">Date and Time</p>
+              <div class="date-group" style="top:268px;left:16px">
+                <label class="select-pill grow">
+                  <span data-bind="dateLong"></span>
+                  <select id="sel-date" aria-label="Date"></select>
+                </label>
+                <span class="chev" set:html={extra.chevron} />
+              </div>
+              <label class="select-pill" style="top:269px;left:235px;width:91px">
+                <span data-bind="time12"></span>
+                <select id="sel-time" aria-label="Start time"></select>
+              </label>
+              <span class="chev" style="top:268px;left:337px" set:html={extra.chevron} />
+              <p class="lbl" style="top:328px;left:17px">Activity</p>
+              <div class="seg" style="top:368px" role="radiogroup" aria-label="Activity">
+                <span class="seg-thumb" data-thumb="activity"></span>
+                <button type="button" role="radio" class="seg-opt" data-activity="Hiking">Hiking</button>
+                <button type="button" role="radio" class="seg-opt" data-activity="Biking">Biking</button>
+              </div>
+              <button class="txt-btn" style="top:428px" type="button" data-sheet-cancel>Cancel</button>
+              <button class="pill-btn" style="top:428px" type="button" data-next>Continue</button>
+              <p class="hint">Step 2: group size</p>
+            </section>
+
+            <!-- Step 2: group size -->
+            <section class="panel" data-panel="size" aria-labelledby="t-size">
+              <button class="icon-btn s-back" type="button" data-step-back aria-label="Back to step 1" set:html={ico.back} />
+              <ol class="steps" aria-label="Step 2 of 4">
+                {steps.map((n) => [n > 1 && <li class="sep" aria-hidden="true" />, <li class="step" data-n={n}>{n}</li>])}
+              </ol>
+              <h2 class="title2" id="t-size">Choose the number of people permitted</h2>
+              <p class="lbl center" style="top:228px">Select a number</p>
+              <label class="select-pill center-pill" style="top:266px;left:132px;width:88px">
+                <span data-bind="size"></span>
+                <select id="sel-size" aria-label="Number of people"></select>
+              </label>
+              <span class="chev" style="top:266px;left:228px" set:html={extra.chevron} />
+              <p class="helper" style="top:343px">This sets the number of people permitted per event or can accept an invite</p>
+              <button class="txt-btn" style="top:428px" type="button" data-sheet-cancel>Cancel</button>
+              <button class="pill-btn" style="top:428px" type="button" data-next>Continue</button>
+              <p class="hint">Step 3: privacy options</p>
+            </section>
+
+            <!-- Step 3: privacy -->
+            <section class="panel" data-panel="privacy" aria-labelledby="t-privacy">
+              <button class="icon-btn s-back" type="button" data-step-back aria-label="Back to step 2" set:html={ico.back} />
+              <ol class="steps" aria-label="Step 3 of 4">
+                {steps.map((n) => [n > 1 && <li class="sep" aria-hidden="true" />, <li class="step" data-n={n}>{n}</li>])}
+              </ol>
+              <h2 class="title2" id="t-privacy">Is this a public or private event?</h2>
+              <div class="seg" style="top:222px" role="radiogroup" aria-label="Privacy">
+                <span class="seg-thumb" data-thumb="privacy"></span>
+                <button type="button" role="radio" class="seg-opt" data-privacy="Private">Private</button>
+                <button type="button" role="radio" class="seg-opt" data-privacy="Public">Public</button>
+              </div>
+              <p class="helper two" style="top:277px;left:16px;width:180px">Invite only, shared via link and join code.</p>
+              <p class="helper two" style="top:277px;left:200px;width:177px">Listed on the community page.</p>
+              <button class="txt-btn" style="top:428px" type="button" data-sheet-cancel>Cancel</button>
+              <button class="pill-btn" style="top:428px" type="button" data-next>Continue</button>
+              <p class="hint">Step 4: review your event details</p>
+            </section>
+
+            <!-- Step 4: confirm (public) or review (private) -->
+            <section class="panel" data-panel="review" aria-labelledby="t-review">
+              <button class="icon-btn s-back" type="button" data-step-back aria-label="Back to step 3" style="top:47px" set:html={ico.back} />
+              <ol class="steps" aria-label="Step 4 of 4" style="top:48px">
+                {steps.map((n) => [n > 1 && <li class="sep" aria-hidden="true" />, <li class="step" data-n={n}>{n}</li>])}
+              </ol>
+              <h2 class="title1" id="t-review" data-bind="reviewTitle" style="top:85px"></h2>
+              <img class="detail-img" data-bind-img="img" src={trails[0].img} alt={trails[0].name} width="361" height="230" />
+              <div class="rows">
+                <div class="row">
+                  <span class="ri" set:html={ico.location} /><span class="rt w147" data-bind="trail"></span>
+                  <span class="ri" set:html={ico.clock} /><span class="rt w147" data-bind="time24"></span>
+                </div>
+                <div class="row">
+                  <span class="ri" set:html={ico.calendar} /><span class="rt w147" data-bind="dateShort"></span>
+                  <span class="ri" set:html={ico.people} /><span class="rt small w52" data-bind="size"></span>
+                  <span class="ri act-hiking" set:html={ico.hiking} /><span class="ri act-biking" set:html={extra.bike} /><span class="rt act w47" data-bind="activity"></span>
+                </div>
+              </div>
+              <button class="txt-btn" style="top:448px" type="button" data-step-back>Modify</button>
+              <button class="pill-btn" style="top:448px" type="button" data-next data-bind="reviewAction"></button>
+            </section>
+
+            <!-- Live -->
+            <section class="panel" data-panel="live" aria-labelledby="t-live">
+              <h2 class="title1" id="t-live" style="top:65px">Your event is live</h2>
+              <img class="live-img" data-bind-img="img" src={trails[0].img} alt={trails[0].name} width="171" height="110" />
+              <div class="live-rows">
+                <p><span class="ri" set:html={ico.location} /><span class="rt" data-bind="trail"></span></p>
+                <p><span class="ri" set:html={ico.clock} /><span class="rt" data-bind="time24"></span></p>
+                <p><span class="ri" set:html={ico.calendar} /><span class="rt" data-bind="dateShort"></span></p>
+                <p class="live-last">
+                  <span class="ri act-hiking" set:html={ico.hiking} /><span class="ri act-biking" set:html={extra.bike} /><span class="rt act" data-bind="activity"></span>
+                  <span class="ri people" set:html={ico.people} /><span class="rt small" data-bind="size"></span>
+                </p>
+              </div>
+              <p class="helper live-help" data-bind="liveHelp"></p>
+              <button class="code-box" type="button" id="copy-code" aria-label="Copy join code">
+                <span id="code-text">Code: ZXY65</span><span class="code-copy" set:html={extra.copy} />
+              </button>
+              <hr class="live-rule" />
+              <div class="share">
+                <button type="button" aria-label="Share on WhatsApp" data-toast="Sharing isn't part of this prototype." set:html={extra.whatsapp} />
+                <button type="button" aria-label="Share in a message" data-toast="Sharing isn't part of this prototype." set:html={extra.chat} />
+                <button type="button" aria-label="Copy link" data-toast="Sharing isn't part of this prototype." set:html={extra.link} />
+              </div>
+              <button class="txt-btn" style="top:448px" type="button" data-toast="Managing events isn't part of this prototype.">Manage event</button>
+              <button class="pill-btn" style="top:448px" type="button" id="live-done">Done</button>
+            </section>
+
+            <!-- Join -->
+            <section class="panel" data-panel="join" aria-labelledby="t-join">
+              <h2 class="title1" id="t-join" style="top:65px">Join this event</h2>
+              <img class="detail-img" data-bind-img="img" src={trails[0].img} alt={trails[0].name} width="361" height="230" />
+              <div class="rows">
+                <div class="row">
+                  <span class="ri" set:html={ico.location} /><span class="rt w147" data-bind="trail"></span>
+                  <span class="ri" set:html={ico.clock} /><span class="rt w147" data-bind="time24"></span>
+                </div>
+                <div class="row">
+                  <span class="ri" set:html={ico.calendar} /><span class="rt w147" data-bind="dateShort"></span>
+                  <span class="ri" set:html={ico.people} /><span class="rt small w52" data-bind="count"></span>
+                  <span class="ri act-hiking" set:html={ico.hiking} /><span class="ri act-biking" set:html={extra.bike} /><span class="rt act w47" data-bind="activity"></span>
+                </div>
+              </div>
+              <button class="txt-btn" style="top:448px" type="button" data-sheet-cancel>Cancel</button>
+              <button class="pill-btn" style="top:448px" type="button" id="confirm-join">Join</button>
+            </section>
+          </div>
+
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+      <p class="caption"><button type="button" id="restart" class="link-btn">Restart prototype</button></p>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #10130b;
+    --surface: #2b2e27;
+    --primary: #26311b;
+    --active: #2d5a27;
+    --line: #2b381f;
+    --muted: #7e7f7d;
+    --dim: #595959;
+    --soft: #8b9182;
+    --future: #6f7569;
+    --accent: #5de372;
+    --upcoming: #2ecc71;
+    --s: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+    background: #0d0f09;
+    color: #fff;
+    font-family: 'Manrope Variable', 'Manrope', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+
+  .nojs {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .stage {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    height: 100%;
+    gap: 6px;
+  }
+
+  .frame {
+    width: calc(393px * var(--s));
+    height: calc(852px * var(--s));
+    border-radius: calc(38px * var(--s));
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #20241a, 0 18px 50px rgb(0 0 0 / 0.5);
+  }
+
+  .phone {
+    position: relative;
+    width: 393px;
+    height: 852px;
+    background: var(--bg);
+    overflow: hidden;
+    transform: scale(var(--s));
+    transform-origin: 0 0;
+  }
+
+  .caption {
+    margin: 0;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .link-btn {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .caption .link-btn {
+    color: var(--soft);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---- screens ---- */
+  .screen {
+    position: absolute;
+    inset: 0;
+  }
+
+  .tabs {
+    position: absolute;
+    top: 104px;
+    left: 0;
+    width: 393px;
+    height: 43px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tab {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    display: flex;
+    align-items: flex-start;
+    height: 43px;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+  }
+
+  .tab.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .pill {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 46px;
+    border-radius: 25px;
+    background: var(--surface);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .search-pill {
+    color: var(--surface);
+    padding-left: 19px;
+    gap: 14px;
+  }
+
+  .search-pill span:last-child {
+    color: #fff;
+  }
+
+  .search-pill .dim {
+    color: var(--muted);
+  }
+
+  .search-ico {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: -2px;
+  }
+
+  .comm-title {
+    position: absolute;
+    top: 164px;
+    left: 14px;
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .comm-title span {
+    color: var(--soft);
+  }
+
+  .avatar {
+    position: absolute;
+    top: 347px;
+    left: 16px;
+    border-radius: 50%;
+  }
+
+  .post-name {
+    position: absolute;
+    top: 351px;
+    left: 80px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .post-meta {
+    position: absolute;
+    top: 377px;
+    left: 80px;
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .post-photo {
+    position: absolute;
+    top: 411px;
+    left: 16px;
+    width: 361px;
+    height: 355px;
+    border-radius: 15px;
+    object-fit: cover;
+  }
+
+  /* ---- feeds ---- */
+  .scroll {
+    position: absolute;
+    top: 148px;
+    bottom: 83px;
+    left: 0;
+    width: 393px;
+    padding: 22px 16px 24px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll > .search-pill {
+    position: relative;
+  }
+
+  .feed-title {
+    margin: 24px 0 29px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  .join-top {
+    display: flex;
+    gap: 20px;
+  }
+
+  .join-top .pill {
+    position: relative;
+  }
+
+  .code-pill {
+    width: 170px;
+    background: var(--primary);
+    justify-content: center;
+  }
+
+  .card {
+    margin-bottom: 42px;
+  }
+
+  .card-img {
+    display: block;
+    width: 361px;
+    height: 230px;
+    border-radius: 23px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    position: relative;
+    height: 95px;
+    padding-top: 14px;
+  }
+
+  .c-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    height: 16px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .c-star {
+    display: block;
+    width: 16px;
+    margin-left: 4px;
+  }
+
+  .c-star svg {
+    display: block;
+    width: 15px;
+    height: 14px;
+  }
+
+  .c-rating {
+    margin-left: 4px;
+    color: var(--dim);
+  }
+
+  .c-name {
+    margin: 3px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
+
+  .c-small {
+    margin: 0;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .btn-details,
+  .btn-host,
+  .btn-join {
+    position: absolute;
+    top: 29px;
+    width: 77px;
+    height: 46px;
+    border-radius: 25px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .btn-details {
+    left: 189px;
+    background: var(--surface);
+    font-weight: 500;
+  }
+
+  .btn-host {
+    left: 284px;
+    background: #fff;
+    color: #000;
+    font-weight: 700;
+  }
+
+  .btn-host:active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .btn-join {
+    left: 284px;
+    top: 1px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .btn-join[disabled] {
+    background: var(--surface);
+    color: var(--muted);
+    cursor: default;
+  }
+
+  .join-card .card-body {
+    padding-top: 0;
+  }
+
+  .join-card .c-meta {
+    margin-top: 14px;
+  }
+
+  /* ---- saved ---- */
+  .saved-edit {
+    position: absolute;
+    top: 66px;
+    left: 347px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .saved-title {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 44px;
+    letter-spacing: 0;
+  }
+
+  .saved-tabs {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 393px;
+    height: 48px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stab {
+    position: absolute;
+    top: 13px;
+    left: 16px;
+    display: flex;
+    align-items: flex-start;
+    line-height: 18px;
+    height: 35px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .stab:first-child {
+    font-weight: 600;
+  }
+
+  .stab.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .saved-list {
+    position: absolute;
+    top: 220px;
+    left: 16px;
+    width: 361px;
+  }
+
+  .s-item {
+    position: relative;
+    display: flex;
+    gap: 17px;
+    height: 77px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
+  }
+
+  .s-item img {
+    width: 47px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .s-text {
+    padding-top: 0;
+  }
+
+  .s-text p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .s-text .s-name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .s-badge {
+    position: absolute;
+    top: 9px;
+    right: 0;
+    width: 75px;
+    height: 30px;
+    border-radius: 55px;
+    background: var(--upcoming);
+    color: #000;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  .s-empty {
+    margin: 30px 0 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--dim);
+  }
+
+  .s-empty button {
+    color: var(--accent);
+    text-decoration: underline;
+    font: inherit;
+  }
+
+  /* ---- chrome ---- */
+  .topnav {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 393px;
+    height: 84px;
+    background: var(--bg);
+  }
+
+  .icon-btn {
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    color: #fff;
+  }
+
+  .icon-btn svg {
+    display: block;
+  }
+
+  .topnav .back {
+    top: 29px;
+    left: 16px;
+  }
+
+  .topnav .bell {
+    top: 29px;
+    left: 302px;
+  }
+
+  .bell-body {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+  }
+
+  .bell-clapper {
+    position: absolute;
+    top: 22px;
+    left: 10px;
+  }
+
+  .topnav .adduser {
+    top: 29px;
+    left: 352px;
+  }
+
+  .bottomnav {
+    position: absolute;
+    top: 769px;
+    left: 0;
+    width: 393px;
+    height: 83px;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+
+  .nav-item {
+    position: absolute;
+    top: 0;
+    left: calc(var(--cx) - 32px);
+    width: 64px;
+    height: 83px;
+    color: var(--muted);
+  }
+
+  .n-ico {
+    position: absolute;
+    top: 17px;
+    left: 19.5px;
+    display: block;
+    width: 25px;
+    height: 25px;
+  }
+
+  .n-ico svg {
+    display: block;
+  }
+
+  .n-ico.flip {
+    transform: scaleX(-1);
+  }
+
+  .n-label {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    width: 64px;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .nav-item.is-active {
+    color: #fff;
+  }
+
+  .nav-item.is-active::after {
+    content: '';
+    position: absolute;
+    top: 71px;
+    left: 9.5px;
+    width: 45px;
+    height: 1px;
+    background: #fff;
+  }
+
+  .toast {
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    z-index: 30;
+    max-width: 330px;
+    padding: 10px 16px;
+    border-radius: 18px;
+    background: var(--surface);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.5);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    opacity: 0;
+    transform: translate(-50%, 6px);
+    pointer-events: none;
+    transition: opacity 0.18s, transform 0.18s;
+  }
+
+  .toast.is-on {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* ---- sheet ---- */
+  .scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: rgb(43 56 31 / 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .phone.sheet-open .scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sheet {
+    position: absolute;
+    z-index: 20;
+    top: 322px;
+    left: 0;
+    width: 393px;
+    height: 530px;
+    border-radius: 15px 15px 0 0;
+    background: var(--bg);
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.3s;
+  }
+
+  .phone.sheet-open .sheet {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet,
+    .phone.sheet-open .sheet,
+    .scrim,
+    .toast {
+      transition: none;
+    }
+  }
+
+  .handle {
+    position: absolute;
+    top: 8px;
+    left: 181px;
+    width: 32px;
+    height: 4px;
+    border-radius: 15px;
+    background: var(--line);
+  }
+
+  .sheet:focus {
+    outline: none;
+  }
+
+  .panel {
+    position: absolute;
+    inset: 0;
+  }
+
+  .panel[hidden] {
+    display: none;
+  }
+
+  .panel > * {
+    position: absolute;
+  }
+
+  .s-back {
+    top: 50px;
+    left: 16px;
+  }
+
+  .steps {
+    top: 52px;
+    left: 16px;
+    width: 361px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .step {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgb(217 217 217 / 0.2);
+    color: var(--future);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .sep {
+    width: 26px;
+    height: 2px;
+    border-radius: 15px;
+    background: var(--line);
+  }
+
+  .step.is-done {
+    color: var(--soft);
+  }
+
+  .step.is-current {
+    color: #fff;
+  }
+
+  .title2,
+  .title1 {
+    left: 16px;
+    width: 361px;
+    margin: 0;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  .title2 {
+    top: 118px;
+    line-height: 30px;
+  }
+
+  .title1 {
+    line-height: 30px;
+  }
+
+  .lbl {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lbl.center {
+    left: 0;
+    width: 393px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .date-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .select-pill.grow {
+    position: relative;
+    min-width: 120px;
+    padding: 0 11px;
+    margin-top: 1px;
+  }
+
+  .select-pill {
+    height: 34px;
+    border-radius: 100px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    letter-spacing: -0.43px;
+    white-space: nowrap;
+  }
+
+  .select-pill select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .select-pill:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .chev {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--surface);
+    pointer-events: none;
+  }
+
+  .seg {
+    left: 16px;
+    width: 361px;
+    height: 49px;
+    border-radius: 25px;
+    background: var(--surface);
+  }
+
+  .seg-thumb {
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    width: 161px;
+    height: 37px;
+    border-radius: 20px;
+    background: var(--active);
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .seg.right .seg-thumb {
+    transform: translateX(181px);
+  }
+
+  .seg-opt {
+    position: absolute;
+    top: 0;
+    width: 180px;
+    height: 49px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .seg-opt:first-of-type {
+    left: 0;
+  }
+
+  .seg-opt:last-of-type {
+    left: 180px;
+  }
+
+  .helper {
+    left: 31px;
+    width: 331px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    color: var(--dim);
+    text-align: center;
+  }
+
+  .helper.two {
+    padding: 0 12px;
+    line-height: 19px;
+    color: var(--soft);
+  }
+
+  .txt-btn,
+  .pill-btn {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .txt-btn {
+    left: 16px;
+    width: 171px;
+    font-weight: 600;
+  }
+
+  .pill-btn {
+    left: 207px;
+    width: 170px;
+    border-radius: 55px;
+    background: var(--primary);
+    font-weight: 700;
+  }
+
+  .hint {
+    top: 503px;
+    left: 0;
+    width: 393px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: center;
+    color: var(--dim);
+  }
+
+  .detail-img {
+    top: 128px;
+    left: 16px;
+    width: 361px;
+    height: 230px;
+    border-radius: 23px;
+    object-fit: cover;
+  }
+
+  .live-img {
+    top: 128px;
+    left: 16px;
+    width: 171px;
+    height: 110px;
+    border-radius: 25px;
+    object-fit: cover;
+  }
+
+  .rows {
+    top: 378px;
+    left: 16px;
+    width: 361px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 20px;
+    margin-bottom: 10px;
+  }
+
+  .ri {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex: none;
+    color: #fff;
+  }
+
+  .ri svg {
+    display: block;
+  }
+
+  .rt {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .rt.small {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .rt.w147 {
+    min-width: 147px;
+  }
+
+  .rt.w52 {
+    width: 52px;
+  }
+
+  .rt.w47 {
+    width: 47px;
+  }
+
+  .live-rows {
+    top: 128px;
+    left: 207px;
+    width: 170px;
+  }
+
+  .live-rows p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 20px;
+    margin: 0 0 10px;
+  }
+
+  .live-rows .live-last {
+    gap: 8px;
+  }
+
+  .live-rows .live-last .rt.act {
+    width: 38px;
+  }
+
+  .live-rows .live-last .people {
+    margin-left: 10px;
+  }
+
+  .act-hiking,
+  .act-biking {
+    display: none;
+  }
+
+  .panel[data-activity='Hiking'] .act-hiking,
+  .panel[data-activity='Biking'] .act-biking {
+    display: block;
+  }
+
+  .live-help {
+    top: 255px;
+    left: 40px;
+    width: 313px;
+  }
+
+  .code-box {
+    top: 298px;
+    left: 16px;
+    width: 361px;
+    height: 50px;
+    border-radius: 25px;
+    background: var(--surface);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .code-copy {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    display: block;
+    width: 25px;
+    height: 25px;
+  }
+
+  .live-rule {
+    top: 368px;
+    left: 31px;
+    width: 331px;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .share {
+    top: 377px;
+    left: 0;
+    width: 393px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    gap: 17px;
+  }
+
+  .share button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: #fff;
+  }
+
+  .share svg {
+    display: block;
+  }
+</style>
+
+<script>
+  // ---------------------------------------------------------------- data
+  type Activity = 'Hiking' | 'Biking';
+  type Privacy = 'Public' | 'Private';
+
+  interface HostEvent {
+    id: string;
+    trail: string;
+    host: string;
+    park: string;
+    img: string;
+    date: Date;
+    minutes: number;
+    activity: Activity;
+    joined: number;
+    cap: number;
+    mine: boolean;
+    privacy?: Privacy;
+  }
+
+  const IMG = '/prototypes/alltrails/img/';
+  const TRAILS: Record<string, { name: string; img: string }> = {
+    'jug-island': { name: 'Jug Island Beach Trail', img: `${IMG}jug-island.webp` },
+    'port-moody': { name: 'Port Moody Shoreline', img: `${IMG}host-forest-1.webp` },
+    'grouse-grind': { name: 'Grouse Grind Trail', img: `${IMG}host-forest-2.webp` },
+  };
+
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // Dates are relative to today so the prototype never shows a date in the past.
+  const base = new Date();
+  base.setHours(0, 0, 0, 0);
+  base.setDate(base.getDate() + (((6 - base.getDay() + 7) % 7) || 7));
+  const addDays = (n: number) => {
+    const d = new Date(base);
+    d.setDate(d.getDate() + n);
+    return d;
+  };
+  const dateShort = (d: Date) => `${MONTHS[d.getMonth()]} ${d.getDate()}`;
+  const dateLong = (d: Date) => `${dateShort(d)}, ${d.getFullYear()}`;
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const time24 = (m: number) => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
+  const time12 = (m: number) => `${Math.floor(m / 60)}:${pad(m % 60)}`;
+  const timeAmPm = (m: number) => `${Math.floor(m / 60) % 12 || 12}:${pad(m % 60)} ${m < 720 ? 'A.M' : 'P.M'}`;
+
+  const seed = (): HostEvent[] => [
+    { id: 'e-port-moody', trail: 'Port Moody Shoreline Trail', host: 'Shauna McQuinn', park: 'Inlet Park', img: `${IMG}port-moody.webp`, date: addDays(7), minutes: 18 * 60, activity: 'Biking', joined: 5, cap: 10, mine: false },
+    { id: 'e-jug-island', trail: 'Jug Island Beach Trail', host: 'Rachael McClean', park: 'Belcarra Regional Park', img: `${IMG}jug-island.webp`, date: base, minutes: 9 * 60, activity: 'Hiking', joined: 3, cap: 10, mine: false },
+  ];
+
+  // ---------------------------------------------------------------- state
+  const phone = document.getElementById('phone') as HTMLElement;
+  const sheet = document.getElementById('sheet') as HTMLElement;
+
+  interface Draft {
+    trailId: string;
+    date: Date;
+    minutes: number;
+    activity: Activity;
+    size: number;
+    privacy: Privacy;
+  }
+
+  let events: HostEvent[] = seed();
+  let joinedIds = new Set<string>();
+  let draft: Draft = newDraft('jug-island');
+  let openerEl: HTMLElement | null = null;
+  let toastTimer = 0;
+
+  function newDraft(trailId: string): Draft {
+    return { trailId, date: base, minutes: 9 * 60, activity: 'Hiking', size: 10, privacy: 'Public' };
+  }
+
+  const $ = <T extends HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector(sel) as T;
+  const $$ = <T extends HTMLElement>(sel: string, root: ParentNode = document) => [...root.querySelectorAll(sel)] as T[];
+
+  // ---------------------------------------------------------------- helpers
+  function toast(text: string) {
+    const el = $('#toast');
+    el.textContent = text;
+    el.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => el.classList.remove('is-on'), 2200);
+  }
+
+  function showScreen(id: 'community' | 'events' | 'saved') {
+    phone.dataset.screen = id;
+    $$('.screen').forEach((s) => (s.hidden = s.dataset.screenId !== id));
+    $('#topnav').hidden = id === 'saved';
+    $('#back').hidden = id !== 'events';
+    $$('.nav-item[data-nav]').forEach((n) => n.classList.toggle('is-active', n.dataset.nav === (id === 'saved' ? 'saved' : 'community')));
+    $$('.nav-item:not([data-nav])').forEach((n) => n.classList.remove('is-active'));
+    if (id === 'saved') renderSaved();
+    if (id === 'events') renderJoin();
+  }
+
+  function showPane(pane: 'host' | 'join') {
+    phone.dataset.pane = pane;
+    $$('[data-pane-tab]').forEach((t) => {
+      const on = t.dataset.paneTab === pane;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+    ($('#pane-host') as HTMLElement).hidden = pane !== 'host';
+    ($('#pane-join') as HTMLElement).hidden = pane !== 'join';
+    if (pane === 'join') renderJoin();
+  }
+
+  // ---------------------------------------------------------------- join + saved lists
+  function renderJoin() {
+    const list = $('#join-list');
+    list.innerHTML = events
+      .filter((e) => e.mine ? e.privacy === 'Public' : true)
+      .map((e) => {
+        const joined = joinedIds.has(e.id);
+        const action = e.mine
+          ? '<button class="btn-join" type="button" disabled>Hosting</button>'
+          : joined
+            ? '<button class="btn-join" type="button" disabled>Joined</button>'
+            : `<button class="btn-join" type="button" data-join="${e.id}" aria-label="Join ${e.trail}">Join</button>`;
+        return `<article class="card join-card">
+          <img class="card-img" src="${e.img}" alt="${e.trail}" width="361" height="230" loading="lazy" />
+          <div class="card-body">
+            <p class="c-meta">Host - ${e.mine ? 'You' : e.host}</p>
+            <h3 class="c-name">${e.trail}</h3>
+            <p class="c-small">${e.park} - ${dateShort(e.date)} @ ${time24(e.minutes)}</p>
+            <p class="c-small">Activity: ${e.activity}</p>
+            ${action}
+          </div>
+        </article>`;
+      })
+      .join('');
+  }
+
+  function renderSaved() {
+    const mine = events.filter((e) => e.mine || joinedIds.has(e.id)).sort((a, b) => a.date.getTime() - b.date.getTime());
+    const list = $('#saved-list');
+    if (!mine.length) {
+      list.innerHTML = `<p class="s-empty">You haven't saved any events yet.<br /><button type="button" data-go-join>Explore events</button> nearby to add one.</p>`;
+      return;
+    }
+    list.innerHTML =
+      mine
+        .map(
+          (e) => `<div class="s-item">
+            <img src="${e.img}" alt="" width="47" height="48" />
+            <div class="s-text">
+              <p class="s-name">${e.trail}</p>
+              <p>${dateShort(e.date)} @ ${timeAmPm(e.minutes)}</p>
+              <p>${e.mine ? 'Hosted by You' : `Hosted by ${e.host}`}</p>
+            </div>
+            <span class="s-badge">Upcoming</span>
+          </div>`,
+        )
+        .join('') + `<p class="s-empty"><button type="button" data-go-join>Explore events</button> nearby to add more</p>`;
+  }
+
+  // ---------------------------------------------------------------- sheet
+  type PanelId = 'when' | 'size' | 'privacy' | 'review' | 'live' | 'join';
+  const STEP_OF: Record<string, number> = { when: 1, size: 2, privacy: 3, review: 4 };
+  let panel: PanelId = 'when';
+  let joinTarget: HostEvent | null = null;
+
+  function setInert(on: boolean) {
+    ['.screen', '#topnav', '.bottomnav'].forEach((s) => $$(s).forEach((el) => ((el as HTMLElement & { inert: boolean }).inert = on)));
+  }
+
+  function openSheet(id: PanelId, opener?: HTMLElement | null) {
+    if (opener !== undefined) openerEl = opener;
+    showPanel(id);
+    phone.classList.add('sheet-open');
+    setInert(true);
+    window.setTimeout(() => {
+      sheet.focus({ preventScroll: true });
+    }, 60);
+  }
+
+  function closeSheet() {
+    phone.classList.remove('sheet-open');
+    setInert(false);
+    openerEl?.focus({ preventScroll: true });
+  }
+
+  function showPanel(id: PanelId) {
+    panel = id;
+    $$('.panel', sheet).forEach((p) => (p.hidden = p.dataset.panel !== id));
+    const active = $<HTMLElement>(`.panel[data-panel="${id}"]`, sheet);
+    sheet.setAttribute('aria-label', $<HTMLElement>('h2', active)?.textContent ?? 'Group hike');
+    renderPanel(active, id);
+  }
+
+  function bind(root: HTMLElement, values: Record<string, string>) {
+    $$('[data-bind]', root).forEach((el) => {
+      const key = el.dataset.bind!;
+      if (key in values) el.textContent = values[key];
+    });
+  }
+
+  function renderPanel(root: HTMLElement, id: PanelId) {
+    const trail = TRAILS[draft.trailId];
+    let activity: Activity = draft.activity;
+    let values: Record<string, string> = {};
+
+    if (id === 'join' && joinTarget) {
+      activity = joinTarget.activity;
+      values = {
+        trail: joinTarget.trail,
+        time24: time24(joinTarget.minutes),
+        dateShort: dateShort(joinTarget.date),
+        count: `${joinTarget.joined}/${joinTarget.cap}`,
+        activity,
+      };
+      $$<HTMLImageElement>('[data-bind-img]', root).forEach((i) => { i.src = joinTarget!.img; i.alt = joinTarget!.trail; });
+    } else {
+      values = {
+        trail: trail.name,
+        time24: time24(draft.minutes),
+        time12: time12(draft.minutes),
+        dateShort: dateShort(draft.date),
+        dateLong: dateLong(draft.date),
+        size: String(draft.size),
+        activity,
+        reviewTitle: draft.privacy === 'Private' ? 'Review the details' : 'Confirm and post',
+        reviewAction: draft.privacy === 'Private' ? 'Next' : 'Post',
+        liveHelp:
+          draft.privacy === 'Private'
+            ? 'This is a private event, meaning people with code or a link can join this event.'
+            : 'This is a public event, meaning anyone can join from the community page.',
+      };
+      $$<HTMLImageElement>('[data-bind-img]', root).forEach((i) => { i.src = trail.img; i.alt = trail.name; });
+    }
+
+    bind(root, values);
+    root.dataset.activity = activity;
+
+    // step indicator
+    const n = STEP_OF[id];
+    if (n) {
+      $$('.step', root).forEach((s) => {
+        const k = Number(s.dataset.n);
+        s.classList.toggle('is-current', k === n);
+        s.classList.toggle('is-done', k < n);
+      });
+    }
+
+    if (id === 'when') {
+      $<HTMLSelectElement>('#sel-date').value = String(draft.date.getTime());
+      $<HTMLSelectElement>('#sel-time').value = String(draft.minutes);
+      setSeg(root.querySelector('[data-thumb="activity"]')!, draft.activity === 'Biking', root, '[data-activity]', draft.activity, 'activity');
+    }
+    if (id === 'size') $<HTMLSelectElement>('#sel-size').value = String(draft.size);
+    if (id === 'privacy') setSeg(root.querySelector('[data-thumb="privacy"]')!, draft.privacy === 'Public', root, '[data-privacy]', draft.privacy, 'privacy');
+  }
+
+  function setSeg(thumb: Element, right: boolean, root: HTMLElement, optSel: string, value: string, attr: string) {
+    thumb.parentElement!.classList.toggle('right', right);
+    $$(optSel, root).forEach((o) => o.setAttribute('aria-checked', String(o.dataset[attr] === value)));
+  }
+
+  function goNext() {
+    if (panel === 'when') showPanel('size');
+    else if (panel === 'size') showPanel('privacy');
+    else if (panel === 'privacy') showPanel('review');
+    else if (panel === 'review') {
+      showPanel('live');
+    }
+  }
+
+  function goBack() {
+    if (panel === 'when') closeSheet();
+    else if (panel === 'size') showPanel('when');
+    else if (panel === 'privacy') showPanel('size');
+    else if (panel === 'review') showPanel('privacy');
+  }
+
+  // ---------------------------------------------------------------- form options
+  function fillSelects() {
+    const dates = Array.from({ length: 14 }, (_, i) => addDays(i));
+    $<HTMLSelectElement>('#sel-date').innerHTML = dates.map((d) => `<option value="${d.getTime()}">${dateLong(d)}</option>`).join('');
+    const times: string[] = [];
+    for (let m = 6 * 60; m <= 20 * 60; m += 30) times.push(`<option value="${m}">${time12(m)}</option>`);
+    $<HTMLSelectElement>('#sel-time').innerHTML = times.join('');
+    $<HTMLSelectElement>('#sel-size').innerHTML = Array.from({ length: 29 }, (_, i) => `<option value="${i + 2}">${i + 2}</option>`).join('');
+  }
+
+  // ---------------------------------------------------------------- events
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    const btn = t.closest<HTMLElement>('button');
+    if (!btn) return;
+
+    if (btn.dataset.toast) return toast(btn.dataset.toast);
+    if (btn.id === 'open-events') { showScreen('events'); showPane('host'); return; }
+    if (btn.id === 'back') { showScreen('community'); return; }
+    if (btn.dataset.paneTab) return showPane(btn.dataset.paneTab as 'host' | 'join');
+    if (btn.dataset.nav) { showScreen(btn.dataset.nav as 'community' | 'saved'); return; }
+    if (btn.hasAttribute('data-go-join')) { showScreen('events'); showPane('join'); return; }
+
+    if (btn.dataset.host) {
+      draft = newDraft(btn.dataset.host);
+      openSheet('when', btn);
+      return;
+    }
+    if (btn.dataset.join) {
+      joinTarget = events.find((ev) => ev.id === btn.dataset.join) ?? null;
+      if (joinTarget) openSheet('join', btn);
+      return;
+    }
+    if (btn.id === 'confirm-join' && joinTarget) {
+      joinTarget.joined += 1;
+      joinedIds.add(joinTarget.id);
+      closeSheet();
+      renderJoin();
+      toast('You are in. The event is in Saved.');
+      return;
+    }
+    if (btn.hasAttribute('data-sheet-cancel')) return closeSheet();
+    if (btn.hasAttribute('data-step-back')) return goBack();
+    if (btn.hasAttribute('data-next')) return goNext();
+
+    if (btn.dataset.activity) { draft.activity = btn.dataset.activity as Activity; renderPanel($('.panel[data-panel="when"]', sheet), 'when'); return; }
+    if (btn.dataset.privacy) { draft.privacy = btn.dataset.privacy as Privacy; renderPanel($('.panel[data-panel="privacy"]', sheet), 'privacy'); return; }
+
+    if (btn.id === 'live-done') {
+      const t = TRAILS[draft.trailId];
+      events = [
+        {
+          id: `mine-${Date.now()}`,
+          trail: t.name,
+          host: 'You',
+          park: '',
+          img: t.img,
+          date: draft.date,
+          minutes: draft.minutes,
+          activity: draft.activity,
+          joined: 0,
+          cap: draft.size,
+          mine: true,
+          privacy: draft.privacy,
+        },
+        ...events,
+      ];
+      closeSheet();
+      toast('Event added to Saved.');
+      return;
+    }
+    if (btn.id === 'copy-code') {
+      const label = $('#code-text');
+      const done = () => {
+        label.textContent = 'Copied';
+        window.setTimeout(() => (label.textContent = 'Code: ZXY65'), 1800);
+      };
+      navigator.clipboard?.writeText('ZXY65').then(done, done);
+      return;
+    }
+    if (btn.id === 'restart') return reset();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && phone.classList.contains('sheet-open')) closeSheet();
+  });
+  $('#scrim').addEventListener('click', () => closeSheet());
+
+  $<HTMLSelectElement>('#sel-date').addEventListener('change', (e) => {
+    draft.date = new Date(Number((e.target as HTMLSelectElement).value));
+    bind($('.panel[data-panel="when"]', sheet), { dateLong: dateLong(draft.date) });
+  });
+  $<HTMLSelectElement>('#sel-time').addEventListener('change', (e) => {
+    draft.minutes = Number((e.target as HTMLSelectElement).value);
+    bind($('.panel[data-panel="when"]', sheet), { time12: time12(draft.minutes) });
+  });
+  $<HTMLSelectElement>('#sel-size').addEventListener('change', (e) => {
+    draft.size = Number((e.target as HTMLSelectElement).value);
+    bind($('.panel[data-panel="size"]', sheet), { size: String(draft.size) });
+  });
+
+  // ---------------------------------------------------------------- sizing
+  const stage = $('#stage');
+  function fit() {
+    const s = Math.min(window.innerWidth / 393, (window.innerHeight - 40) / 852, 1.25);
+    stage.style.setProperty('--s', String(Math.max(s, 0.3)));
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  // ---------------------------------------------------------------- reset + start state
+  function reset() {
+    closeSheet();
+    events = seed();
+    joinedIds = new Set();
+    draft = newDraft('jug-island');
+    showScreen('community');
+    showPane('host');
+  }
+
+  fillSelects();
+  showScreen('community');
+  showPane('host');
+  showPanel('when');
+
+  // ?start=<state> opens the prototype partway through, for deep links and screenshots.
+  const start = new URLSearchParams(location.search).get('start');
+  if (start) {
+    const events_ = () => { showScreen('events'); showPane('host'); };
+    if (start === 'host') events_();
+    else if (start === 'join') { showScreen('events'); showPane('join'); }
+    else if (start === 'saved') showScreen('saved');
+    else if (['when', 'size', 'privacy', 'review', 'live'].includes(start)) {
+      events_();
+      if (start === 'review' || start === 'live') draft.privacy = 'Public';
+      openSheet(start as PanelId, null);
+    } else if (start === 'review-private') {
+      events_();
+      draft.privacy = 'Private';
+      openSheet('review', null);
+    } else if (start === 'join-sheet') {
+      showScreen('events');
+      showPane('join');
+      joinTarget = events[0];
+      openSheet('join', null);
+    }
+  }
+</script>
