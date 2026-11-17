@@ -506,9 +506,8 @@
 .proto {
   display: grid;
   gap: 2.5rem;
-  padding-block: 3rem 1rem;
+  padding-block: 3rem 5rem;
   border-top: 1px solid var(--rule);
-  margin-top: 2rem;
 }
 
 @media (min-width: 62rem) {

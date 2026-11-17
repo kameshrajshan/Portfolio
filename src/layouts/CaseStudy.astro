@@ -50,6 +50,8 @@ const { title, tags, meta, cover, pageTitle, description, prototype } = Astro.pr
       {cover.caption && <figcaption>{cover.caption}</figcaption>}
     </figure>
 
+    <slot />
+
     {prototype && (
       <section class="proto wrap" aria-labelledby="proto-title">
         <div class="proto-text">
@@ -69,8 +71,6 @@ const { title, tags, meta, cover, pageTitle, description, prototype } = Astro.pr
         </div>
       </section>
     )}
-
-    <slot />
   </article>
 
   <script>
