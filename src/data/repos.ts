@@ -23,6 +23,13 @@ const DESCRIPTIONS: Record<string, string> = {
     'This site. Built with Astro, with images optimized at build time and this repo list fetched from GitHub.',
 };
 
+// Repos with a deployed site link there instead of to the GitHub repo. A repo's
+// "Website" field on GitHub (homepage) is used automatically; add entries here for
+// anything that has no homepage set.
+const LIVE: Record<string, string> = {
+  Dutam: 'https://kameshrajshan.github.io/Dutam/index.html?lang=en',
+};
+
 /**
  * Public, non-fork repositories, newest push first. Fetched from the GitHub API at
  * build time. If the request fails (rate limit, offline), the committed snapshot in
@@ -47,7 +54,7 @@ export async function getRepos(): Promise<Repo[]> {
       .filter((r) => !r.private && !r.fork)
       .map((r) => ({
         name: r.name,
-        url: r.html_url,
+        url: r.homepage || r.html_url,
         description: r.description,
         language: r.language,
         stars: r.stargazers_count,
@@ -59,6 +66,6 @@ export async function getRepos(): Promise<Repo[]> {
 
   return raw
     .filter((r) => !HIDDEN.has(r.name))
-    .map((r) => ({ ...r, description: r.description ?? DESCRIPTIONS[r.name] ?? null }))
+    .map((r) => ({ ...r, url: LIVE[r.name] ?? r.url, description: r.description ?? DESCRIPTIONS[r.name] ?? null }))
     .sort((a, b) => b.pushedAt.localeCompare(a.pushedAt));
 }
