@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { u } from '../utils/url';
 import Img from '../components/Img.astro';
 import { design } from '../data/work';
 import { getRepos } from '../data/repos';
@@ -50,7 +51,7 @@ const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
           <li id={`src-${s.n}`} data-src={s.n}>
             <span class="src-n">{s.n}</span>
             <span>
-              <a class="src-title" href={s.href}>{s.title}</a>
+              <a class="src-title" href={s.href.startsWith("/") ? u(s.href) : s.href}>{s.title}</a>
               <span class="src-kind">{s.kind}</span>
             </span>
           </li>
@@ -98,7 +99,7 @@ const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
         <ul class="ledger">
           {design.map((p) => (
             <li>
-              <a class="row row--design" href={`/work/${p.slug}`}>
+              <a class="row row--design" href={u(`/work/${p.slug}`)}>
                 <span class="row-cover">
                   <Img src={p.cover} alt={p.coverAlt} widths={[320, 640, 960]} sizes="(min-width: 48rem) 208px, 100vw" />
                 </span>
@@ -200,7 +201,7 @@ const label = (n: number) => `Source ${n}: ${sources[n - 1].title}`;
         <ul class="contact-links">
           <li><a href="https://github.com/kameshrajshan">GitHub</a></li>
           <li><a href="https://www.linkedin.com/in/kamesh-raj-shanmugam-a33677364/">LinkedIn</a></li>
-          <li><a href="/documents/KameshRajShanmugam_Resume_IN.pdf">Resume (PDF)</a></li>
+          <li><a href={u("/documents/KameshRajShanmugam_Resume_IN.pdf")}>Resume (PDF)</a></li>
         </ul>
       </div>
     </div>

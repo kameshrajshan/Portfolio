@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/manrope';
+import { u } from '../../utils/url';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -45,7 +46,7 @@ const extra = {
     '<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="10" y1="10" x2="16" y2="16" stroke="#D9D9D9"/><circle cx="7.5" cy="7.5" r="7.5" fill="#D9D9D9"/><circle cx="7.5" cy="7.5" r="6.5" fill="currentColor"/></svg>',
 };
 
-const img = '/prototypes/alltrails/img/';
+const img = u('/prototypes/alltrails/img/');
 
 const trails = [
   {
@@ -91,7 +92,7 @@ const steps = [1, 2, 3, 4];
       content="A working prototype of the Group Hike feature: host a hike in four steps, join one from the Community tab, and see both in Saved."
     />
     <meta name="theme-color" content="#0d0f09" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={u("/favicon.svg")} type="image/svg+xml" />
   </head>
   <body>
     <noscript><p class="nojs">This prototype needs JavaScript.</p></noscript>
@@ -1446,7 +1447,7 @@ const steps = [1, 2, 3, 4];
     privacy?: Privacy;
   }
 
-  const IMG = '/prototypes/alltrails/img/';
+  const IMG = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/prototypes/alltrails/img/`;
   const TRAILS: Record<string, { name: string; img: string }> = {
     'jug-island': { name: 'Jug Island Beach Trail', img: `${IMG}jug-island.webp` },
     'port-moody': { name: 'Port Moody Shoreline', img: `${IMG}host-forest-1.webp` },

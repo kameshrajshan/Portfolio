@@ -2,6 +2,7 @@
 import '@fontsource-variable/bricolage-grotesque/opsz.css';
 import '@fontsource-variable/source-serif-4/opsz.css';
 import '../styles/global.css';
+import { u } from '../utils/url';
 
 interface Props {
   title: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const path = Astro.url.pathname;
-const onHome = path === '/' || path === '';
+const onHome = path === u('/') || path === u('/') + '/' || path === '' || path === '/';
 const nav = [
   { href: '/#software', label: 'Software' },
   { href: '/#design', label: 'Design' },
@@ -37,12 +38,12 @@ const nav = [
         if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
       } catch (e) {}
     </script>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={u("/favicon.svg")} type="image/svg+xml" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header wrap">
-      <a class="brand" href="/" aria-label="Kamesh Raj Shanmugam, home">
+      <a class="brand" href={u("/")} aria-label="Kamesh Raj Shanmugam, home">
         Kamesh Raj Shanmugam
         <small>AI developer and designer</small>
       </a>
@@ -50,7 +51,7 @@ const nav = [
         <ul>
           {nav.map((item) => (
             <li>
-              <a href={onHome ? item.href.replace('/', '') : item.href}>{item.label}</a>
+              <a href={onHome ? item.href.replace('/', '') : u(item.href)}>{item.label}</a>
             </li>
           ))}
           <li><button class="theme-toggle" id="theme-toggle" type="button" hidden>Dark</button></li>

@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import Img from '../components/Img.astro';
+import { u } from '../utils/url';
 import '../styles/case.css';
 
 interface Props {
@@ -26,7 +27,7 @@ const { title, tags, meta, cover, pageTitle, description, prototype } = Astro.pr
 <Base title={pageTitle} description={description}>
   <article>
     <header class="case-hero wrap">
-      <a class="case-back" href="/#design">All design work</a>
+      <a class="case-back" href={u("/#design")}>All design work</a>
       <h1>{title}</h1>
       <p class="case-tags">{tags.join(', ')}</p>
       <dl class="case-meta">
@@ -61,11 +62,11 @@ const { title, tags, meta, cover, pageTitle, description, prototype } = Astro.pr
             {prototype.steps.map((step) => <li>{step}</li>)}
           </ol>
           <p class="proto-note">{prototype.note}</p>
-          <p><a href={prototype.src}>Open full screen</a></p>
+          <p><a href={u(prototype.src)}>Open full screen</a></p>
         </div>
         <div class="proto-stage">
-          <button class="proto-poster" type="button" data-proto={prototype.src} aria-label="Load the interactive prototype">
-            <img src={prototype.poster} width="393" height="852" alt={prototype.posterAlt} />
+          <button class="proto-poster" type="button" data-proto={u(prototype.src)} aria-label="Load the interactive prototype">
+            <img src={u(prototype.poster)} width="393" height="852" alt={prototype.posterAlt} />
             <span class="proto-go">Start the prototype</span>
           </button>
         </div>
